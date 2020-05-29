@@ -692,7 +692,6 @@ input.mdl-button[type="submit"] {
   min-height: 200px;
   overflow: hidden;
   width: 330px;
-  z-index: 1;
   position: relative;
   background: #fff;
   border-radius: 2px;
@@ -1238,7 +1237,8 @@ input.mdl-button[type="submit"] {
   overflow: visible;
   height: 0;
   width: 0;
-  z-index: -1
+  z-index: -1;
+  top: 334px !important
 }
 
 .mdl-menu__container.is-visible {

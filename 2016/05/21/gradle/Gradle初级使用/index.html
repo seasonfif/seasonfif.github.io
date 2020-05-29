@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.2 -->
+    <script>
+        window.materialVersion = "1.5.2"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+    <link rel="dns-prefetch" href="https://cdn1.lncld.net"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            Gradle初级使用 | 
+        
+        seasonfif | 第五季
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/seasonfif.JPG">
+    <link rel="icon" href="/img/seasonfif.JPG">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="theme-color" content="#0097A7"/>
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?OIqfivxywtwaQrjrKubNQg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?dHwxgeJO7kQ9iS02XSHaDA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="seasonfif | 第五季">
+    <meta name="msapplication-starturl" content="https://seasonfif.github.io/2016/05/21/gradle/Gradle初级使用/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="seasonfif | 第五季">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/seasonfif.JPG">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://seasonfif.github.io/2016/05/21/gradle/Gradle初级使用/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Gradle初级使用 | seasonfif | 第五季">
+    <meta property="og:image" content="/img/seasonfif.JPG">
+    <meta property="og:description" content="">
+    
+
+    
+        <meta property="article:published_time" content="Sat May 21 2016 10:11:43 GMT+0800">
+        <meta property="article:modified_time" content="Fri May 29 2020 11:53:03 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://seasonfif.github.io/2016/05/21/gradle/Gradle初级使用/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://seasonfif.github.io/2016/05/21/gradle/Gradle初级使用/index.html",
+    "headline": "Gradle初级使用",
+    "datePublished": "Sat May 21 2016 10:11:43 GMT+0800",
+    "dateModified": "Fri May 29 2020 11:53:03 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "第五季",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/seasonfif.JPG"
+        },
+        "description": "陌上人如玉 ,,第五季的博客 "
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "seasonfif | 第五季",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/seasonfif.JPG"
+        }
+    },
+    "keywords": "",
+    "description": "",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-111267309-1', 'auto');ga('send', 'pageview');
+</script>
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                <style>
+
+    .header_content{
+        width: 100%;
+        height: 220px;
+        background: #0097A7;
+        box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
+    }
+
+    .top-header {
+        /* position: fixed; */
+        left: 0;
+        top: 0;
+        width: 100%;
+        color: #0097A7;
+        height: 56px;
+        background: #0097A7;
+        -webkit-transition: padding-left .6s ease-in-out, background-color .3s cubic-bezier(.4,0,.2,1), box-shadow .15s linear;
+        transition: padding-left .6s ease-in-out, background-color .3s cubic-bezier(.4,0,.2,1), box-shadow .15s linear;
+        /* transition: all 1500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; */
+        z-index: 1;
+    }
+    .top-header.fixed {
+        position: fixed;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    }
+    .top-header.fixed .header-title {
+        visibility: visible;
+    }
+
+    /* flex布局  */
+    .flex-row,
+    .flex-column,
+    .flex-row-vertical {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display:         flex;
+        -webkit-align-items: center; 
+        align-items: center;
+    }
+
+    .MD-burger-layer {
+        background: white !important;
+    }
+
+    .MD-burger-icon- {
+        margin: 0 0 0 1pc;
+        cursor: pointer;
+        border: none;
+        background: 0 0;
+        outline: 0;
+        top: 2pc;
+        z-index: 0;
+        height: 2pc;
+        width: 2pc;
+    }
+
+    .header-icon {
+        width: 56px;
+        height: 56px;
+        line-height: 56px;
+        text-align: center;
+        color: white;
+    }
+
+    .flex-col {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+    }
+    .ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+
+<div class="header_content" id="header">
+    <header class="top-header" id="header_top">
+        <div class="flex-row">
+
+            <!-- Hamburger Button -->
+            <button class="MD-burger-icon- sidebar-toggle">
+                <span class="MD-burger-layer"></span>
+            </button>
+
+            <div class="flex-col header-title ellipsis"></div>
+
+            <a style="margin-right: 5px;" class="menu-search modal-trigger" href="#search">
+                <i style="margin: 13px;" class="material-icons mdl-color-text--white" role="presentation">search</i>
+            </a>
+        </div>
+    </header>
+
+    <style>
+    #lean_overlay {  
+        position: fixed;  
+        z-index:1;
+        top: 0px;  
+        left: 0px;  
+        height:100%;  
+        width:100%;  
+        background: #000;  
+        display: none;  
+    }
+
+    .modal {
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      background-color: #fafafa;
+      padding: 0;
+      max-height: 70%;
+      width: 55%;
+      margin: 0 auto;
+      overflow-y: auto;
+      border-radius: 2px;
+      will-change: top, opacity;
+      box-shadow: 0 16px 28px 0 rgba(0,0,0,0.22),0 25px 55px 0 rgba(0,0,0,0.21);
+    }
+
+    .search-modal {
+      padding: 10px 0 30px 0;
+      max-height: 80%;
+    }
+
+    .modal-bg{
+      background-color: rgb(204, 232, 207);
+      z-index: 9999;
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .row {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        padding: 0px 15px;
+    }
+
+    .row .col.s12 {
+        width: 100%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+    .row .col {
+        float: left;
+        box-sizing: border-box;
+        padding: 0 0.75rem;
+    }
+    .input-field {
+        position: relative;
+        margin-top: 1rem;
+    }
+
+
+    input[type=text]
+    :focus {
+      border-bottom-color: #757575;
+      box-shadow: 0 1px 0 0 #757575;
+    }
+    input[type=text]
+    :focus+label {
+      color: #212121;
+    }
+    .search-modal .search-result {
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
+    .mdl-textfield__input {
+        color: #0097A7;
+    }
+</style>
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+            <span id="search-input-title" style="display:block; margin-bottom:7px;"><label for="search-input">搜索</label></span>
+            <input id="search-input" class="mdl-textfield__input search-input" type="search" placeholder="">   
+        </div>
+    </div>
+    <div id="local-search-result" class="search-result col s12">
+    </div>
+</div>
+</div>
+
+
+
+                <style>
+                    .material-layout__content{
+                        margin-top: -130px !important;
+                        padding-top: 0px !important;
+                    }
+                </style>
+                
+                
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    <!-- Layouts -->
+
+    <style>
+        .mdl-card:hover {
+            box-shadow:0px 20px 20px rgba(0,0,0,.156863),0 3px 10px rgba(0,0,0,.227451);
+        }
+
+        .material-post_container {
+            display: flex;
+            flex-flow: row;
+            flex-wrap: nowrap;
+        }
+
+        .material-post{
+            max-width: 768px !important;
+            width: 100%;
+            margin: 0 0 0 0 !important;
+        }
+
+        .center-container{
+            display: flex;
+            flex-flow: row;
+            flex-wrap: nowrap;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 768px;
+            
+                max-width: 900px;
+            
+        }
+        
+        /* 目录样式 */
+        .post-toc-wrap {
+        position: fixed;
+        margin-left: 50px;
+        overflow-x: hidden;
+        }
+        .post-toc-wrap.top{
+            margin-top: 150px;
+        }
+        .post-toc-wrap.fixed {
+        top: 0px;
+        bottom: 140px;
+        overflow-y: auto;
+        }
+        .post-toc-wrap ol,
+        .post-toc-wrap ul {
+        list-style: none;
+        margin: 0;
+        }
+        .post-toc-wrap h4 {
+        padding: 0 0 0px 20px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #727272;
+        }
+
+        .post-toc-child {
+        padding-left: 10px;
+        }
+        .post-toc {
+            width: auto;
+            word-wrap: normal;
+            white-space: nowrap;
+            padding: 0;
+            list-style: none;
+            padding: 0 7px;
+        }
+
+        .post-toc a:hover {
+            color: #ff4081;
+            text-decoration: underline;
+        }
+        .post-toc >.post-toc-item {
+        position: relative;
+        }
+        .post-toc-item {
+        font-weight: 400;
+        color: #ff4081;
+        }
+        .post-toc-item.active >.post-toc-link {
+        font-weight: 600;
+        color: #ff4081;
+        }
+        .post-toc-item.active >.post-toc-link:before {
+        background: rgba(0,0,0,0.06);
+        }
+        .post-toc-item.active >.post-toc-link:after {
+        border-left: 3px solid #ff4081;
+        }
+        .post-toc-link {
+        position: relative;
+        z-index: 2;
+        display: block;
+        padding: 3px 20px;
+        line-height: 1.5rem;
+        color: inherit;
+        word-break: break-all;
+        }
+        .post-toc-link:hover {
+        opacity: .8;
+        }
+        .post-toc-link:before,
+        .post-toc-link:after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        }
+    </style>
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="center-container">
+            <div class="material-post mdl-grid">
+                <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                    <!-- Post Header(Thumbnail & Title) -->
+                    
+    <!-- Paradox Post Header -->
+    
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(https://raw.githubusercontent.com/seasonfif/picture/master/other/gradleinfo.png)">
+    
+            <p class="article-headline-p">
+                Gradle初级使用
+            </p>
+        </div>
+
+
+
+
+
+                    
+                        <!-- Paradox Post Info -->
+                        <style>
+    .worldcount_content{
+        margin-left:25px;
+    }
+
+    @media screen and (max-width: 480px) {
+      .worldcount_content {
+        margin-left:5px
+      }
+  }
+</style>
+
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/seasonfif.JPG" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>第五季</strong>
+        <span>2016.5.21</span>
+    </div>
+
+    <div class="worldcount_content">
+        <span class="post-count">字数：2,982字</span>
+        <span class="post-count">时长：13分钟</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Tags (bookmark) -->
+    
+
+    <!-- Share -->
+    
+        <button id="article-functions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="weixin-qrcode-button">
+    <li class="mdl-menu__item">微信扫一扫分享</li>
+    
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC0UlEQVR42u3aUXLiMBAEUO5/6d0TYLpHZtdIz1+UA1hPqcpkevT6c+T1wsbGxsbGxsbGxn4k+xVfd30qeZ18tn46NjY29tbsD3/6L9/z7mHXm7WyhtmasbGxsU9gJ4B3j8yL0F1Frt50bGxsbOyYlzcMeZuxsmZsbGxs7KTBmC06aVQeWrexsbGxH8nOA53kzl2v10MobGxs7BPYK23D/3r9T+fb2NjY2A9mt9f1V0eFJB4etEXrw0qwsbGxN2XnhWGFlH9/e/Qn/zVgY2Nj781uD+jM4qdZsWx/+vY+NjY29qbslcKwgrwuXW3hjFodbGxs7K3Zs5Aobxu+EVG1IRQ2Njb2ruw2xMkj/vWwqS2xw/k2NjY29o+zc/ws7lk/ADQrjVGohI2Njb0de6XBuL5zVzw0GxVjY2Nj781ui9ZsMFy3DSNwHSphY2Njb8HO24B2rJu/ZyWWyleFjY2NvTc7j2mSZbWH4/Px7WzLsLGxsU9gt4tow51ZRNVux3DQi42Njf3j7DxUWll0HjDlkVZd3rCxsbG3Zs8KRlv8kpFAvqo8usLGxsY+mb0SLeUFLx9RLMVh2NjY2Juy8/g+KTz5Vq6UvZvPnGJjY2Nvyr4rTkpKy6w1uu3wJTY2NvaPs/PmoR0etLFROwCoCy02Njb2Mex8WDt7fBtUXX9/URqxsbGxt2bnjUESDM1CqzaQysMsbGxsbOzrpa9sTTuWaI9pYmNjY5/Gboep+dGZNrr6yhZjY2Njb8pur3bIunIYKA+bokECNjY29qbs2cC1bQnaMcNdBzexsbGxz2G3x2JmTUi+fW3zEw0PsLGxsQ9gz4ass/gpOfqzEnVhY2NjY7f/+udladYCJfc/bB82NjY2dtyWtE1Cu1lJw4ONjY19JjtvGJJGYhYzfXFt2NjY2Fuz14Ob2dHJfEjcPhcbGxv7HPY5FzY2NjY2NjY2NvZjrr+sxQGTV5dzfAAAAABJRU5ErkJggg==">
+    
+</ul>
+
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2016/05/21/gradle/Gradle初级使用/" class="leancloud-views_num" data-flag-title="Gradle初级使用">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weixin -->
+    
+        <a id="weixin-qrcode-button" class="post_share-link" href="javascript:void(0);">
+            <li class="mdl-menu__item" role="presentation">
+                分享到微信
+            </li>
+        </a>
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Gradle初级使用&url=https://seasonfif.github.io/2016/05/21/gradle/Gradle初级使用/index.html&pic=https://seasonfif.github.io/img/seasonfif.JPG&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=seasonfif | 第五季&title=Gradle初级使用&summary=&pics=https://seasonfif.github.io/img/seasonfif.JPG&url=https://seasonfif.github.io/2016/05/21/gradle/Gradle初级使用/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+    
+</div>
+
+                    
+                    
+                    <!-- Post Content -->
+                    <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <p>　　Gradle的超强构建能力在Android Studio中可以说表现的淋漓尽致。下面我就将如何上手Gradle展开讨论。</p>
+<h3 id="基本知识"><a href="#基本知识" class="headerlink" title="基本知识"></a>基本知识</h3><p>　　需要明确gradle跟maven一样，也有一个配置文件，maven里面是叫pom.xml，而在gradle中是叫build.gradle。Android Studio中的android项目通常至少包含两个build.gradle文件，一个是project范围的，另一个是module范围的，由于一个project可以有多个module，所以每个module下都会对应一个build.gradle。这么说有点抽象，看下面这个图：<br><img src="https://raw.githubusercontent.com/seasonfif/picture/master/other/gradle-setup.png" alt="setup"><br>　　这是一个android工程的project视图，上面那个是module下的build.gradle文件。下面那个是project下的build.gradle文件。这两个文件是有区别的，project下的build.gradle是基于整个project的配置，而module下的build.gradle是每个模块自己的配置。</p>
+<h4 id="认识build-gradle"><a href="#认识build-gradle" class="headerlink" title="认识build.gradle"></a>认识build.gradle</h4><p>　　下面看下这两个build.gradle里面的内容：<br>　　1. project里面的build.gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Top-level build file where you can add configuration options common to all sub-projects/modules.</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">buildscript</span> &#123;</span><br><span class="line">    <span class="comment">//构建过程依赖的仓库</span></span><br><span class="line">    <span class="keyword">repositories</span> &#123;</span><br><span class="line">    jcenter()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//构建过程需要依赖的库</span></span><br><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">     <span class="comment">//下面声明的是gradle插件的版本</span></span><br><span class="line">     <span class="keyword">classpath</span> <span class="string">'com.android.tools.build:gradle:1.1.0'</span></span><br><span class="line">     <span class="comment">// <span class="doctag">NOTE:</span> Do not place your application dependencies here; they belong</span></span><br><span class="line">     <span class="comment">// in the individual module build.gradle files</span></span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//这里面配置整个项目依赖的仓库,这样每个module就不用配置仓库了</span></span><br><span class="line"><span class="keyword">allprojects</span> &#123;</span><br><span class="line">     <span class="keyword">repositories</span> &#123;</span><br><span class="line">          jcenter()</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　这里的仓库repositories需要声明两次，这其实是由于它们作用不同，buildscript中的仓库是gradle脚本自身需要的资源，而allprojects下的仓库是项目所有模块需要的资源。所以配配的时候要注意一下。<br>　　2. module里面的build.gradle:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明插件，这是一个android程序，如果是android库，应该是com.android.library</span></span><br><span class="line">apply plugin: <span class="string">'com.android.application'</span></span><br><span class="line">android &#123;</span><br><span class="line">     <span class="comment">//安卓构建过程需要配置的参数</span></span><br><span class="line">     compileSdkVersion <span class="number">21</span><span class="comment">//编译版本</span></span><br><span class="line">     buildToolsVersion <span class="string">"21.1.2"</span><span class="comment">//buildtool版本</span></span><br><span class="line">     defaultConfig &#123;<span class="comment">//默认配置，会同时应用到debug和release版本上</span></span><br><span class="line">     applicationId <span class="string">"com.taobao.startupanim"</span><span class="comment">//包名</span></span><br><span class="line">     minSdkVersion <span class="number">15</span></span><br><span class="line">     targetSdkVersion <span class="number">21</span></span><br><span class="line">     versionCode <span class="number">1</span></span><br><span class="line">     versionName <span class="string">"1.0"</span></span><br><span class="line">&#125;</span><br><span class="line"> buildTypes &#123;</span><br><span class="line">     <span class="comment">//这里面可以配置debug和release版本的一些参数，比如混淆、签名配置等</span></span><br><span class="line">     release &#123;</span><br><span class="line">         <span class="comment">//release版本</span></span><br><span class="line">         minifyEnabled <span class="keyword">false</span><span class="comment">//是否开启混淆</span></span><br><span class="line">         proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span><span class="comment">//混淆文件位置</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">     <span class="comment">//模块依赖</span></span><br><span class="line">     <span class="keyword">compile</span> <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])<span class="comment">//依赖libs目录下所有jar包</span></span><br><span class="line">     <span class="keyword">compile</span> <span class="string">'com.android.support:appcompat-v7:21.0.3'</span><span class="comment">//依赖appcompat库</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>　　defaultConfig中是一些基本配置，它会同时应用到debug/release版本上，下面列举了所有可配项及对应的值：<br><img src="https://raw.githubusercontent.com/seasonfif/picture/master/other/defaultConfig.png" alt="defaultConfig"><br>　　buildTypes结点很重要，这里可以配置构建的版本的一些参数，默认有两个构建版本release/debug，当然你可以自定义一个构建版本，比如叫develop,然后通过gradlew assembleDevelop就可以生成对应的apk了。<br>　　buildTypes里还有很多可配置项，下面列举了所有可配项以及debug/release版本的默认值：<br><img src="https://raw.githubusercontent.com/seasonfif/picture/master/other/buildTypes.png" alt="buildTypes"></p>
+<h4 id="认识gradle-properties"><a href="#认识gradle-properties" class="headerlink" title="认识gradle.properties"></a>认识gradle.properties</h4><p>　　gradle相关的配置文件-gradle.properties：<br>　　从名字上就知道它是一个配置文件，没错，这里面可以定义一些常量供build.gradle使用，比如可以配置签名相关信息如keystore位置，密码，keyalias等。<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"># <span class="keyword">Project</span>-wide Gradle settings.</span><br><span class="line"></span><br><span class="line"># IDE (e.g. Android Studio) users:</span><br><span class="line"># Gradle settings configured through the IDE *will override*</span><br><span class="line"># <span class="keyword">any</span> settings specified in <span class="keyword">this</span> <span class="keyword">file</span>.</span><br><span class="line"></span><br><span class="line"># <span class="keyword">For</span> more details on how to configure your build environment visit</span><br><span class="line"># http:<span class="comment">//www.gradle.org/docs/current/userguide/build_environment.html</span></span><br><span class="line"></span><br><span class="line"># Specifies the JVM arguments used <span class="keyword">for</span> the daemon process.</span><br><span class="line"># The setting is particularly useful <span class="keyword">for</span> tweaking memory settings.</span><br><span class="line"># <span class="keyword">Default</span> value: -Xmx10248m -XX:MaxPermSize=<span class="number">256</span>m</span><br><span class="line">#org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=<span class="number">512</span>m -XX:+HeapDumpOnOutOfMemoryError -Dfile.encoding=UTF-<span class="number">8</span></span><br><span class="line"></span><br><span class="line"># When configured, Gradle will run in incubating parallel mode.</span><br><span class="line"># <span class="keyword">This</span> option should only be used with decoupled projects. More details, visit</span><br><span class="line"># http:<span class="comment">//www.gradle.org/docs/current/userguide/multi_project_builds.html#sec:decoupled_projects</span></span><br><span class="line">org.gradle.parallel=<span class="keyword">true</span></span><br><span class="line">org.gradle.daemon=<span class="keyword">true</span></span><br><span class="line">org.gradle.configureondemand=<span class="keyword">true</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="认识settings-gradle"><a href="#认识settings-gradle" class="headerlink" title="认识settings.gradle"></a>认识settings.gradle</h4><p>　　模块配置文件settings.gradle：<br>　　这个文件是用来配置多模块的，比如你的项目有两个模块module-a,module-b,那么你就需要在这个文件中进行配置，格式如下：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">include</span> <span class="string">':module-a'</span>,<span class="string">':module-b'</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="gradle文件夹"><a href="#gradle文件夹" class="headerlink" title="gradle文件夹"></a>gradle文件夹</h4><p>　　gradle文件夹里面有两个文件，gradle-wrapper.jar和gradle-wrapper.properties,它们就是gradle wrapper。gradle项目都会有，你可以通过命令gradle init来创建它们（前提是本地安装了gradle并且配置到了环境变量中）。<br>　　gradle-wrapper.properties里面配置了gradle版本，具体内容如下：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">#Mon Oct <span class="number">30</span> <span class="number">18</span>:<span class="number">06</span>:<span class="number">12</span> CST <span class="number">2017</span></span><br><span class="line">distributionBase=GRADLE_USER_HOME</span><br><span class="line">distributionPath=wrapper<span class="regexp">/dists</span></span><br><span class="line"><span class="regexp">zipStoreBase=GRADLE_USER_HOME</span></span><br><span class="line"><span class="regexp">zipStorePath=wrapper/</span>dists</span><br><span class="line">distributionUrl=https\:<span class="comment">//services.gradle.org/distributions/gradle-4.1-all.zip</span></span><br></pre></td></tr></table></figure></p>
+<h4 id="gradlew和gradlew-bat"><a href="#gradlew和gradlew-bat" class="headerlink" title="gradlew和gradlew.bat"></a>gradlew和gradlew.bat</h4><p>　　这分别是linux下的shell脚本和windows下的批处理文件，它们的作用是根据gradle-wrapper.properties文件中的distributionUrl下载对应的gradle版本。这样就可以保证在不同的环境下构建时都是使用的统一版本的gradle，即使该环境没有安装gradle也可以，因为gradle wrapper会自动下载对应的gradle版本。<br>　　gradlew的用法跟gradle一模一样，比如执行构建gradle build命令，你可以用gradlew build。gradlew即gradle wrapper的缩写。</p>
+<h4 id="gradle仓库"><a href="#gradle仓库" class="headerlink" title="gradle仓库"></a>gradle仓库</h4><p>gradle有三种仓库，maven仓库，ivy仓库以及flat本地仓库。声明方式如下：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">maven&#123;</span><br><span class="line">      url <span class="string">"..."</span></span><br><span class="line">&#125;</span><br><span class="line">ivy&#123;</span><br><span class="line">      url <span class="string">"..."</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">flatDir</span>&#123;</span><br><span class="line">      dirs <span class="string">'xxx'</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>单独的引入一个本地仓库可以这样写<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">repositories</span> &#123;</span><br><span class="line">  <span class="keyword">flatDir</span> &#123;</span><br><span class="line">    dirs <span class="string">'../im/libs2'</span></span><br><span class="line">    dirs <span class="string">'../lib/libs2'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>有一些仓库提供了别名，可直接使用：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">repositories</span>&#123;</span><br><span class="line">     mavenCentral()</span><br><span class="line">     jcenter()</span><br><span class="line">     mavenLocal()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="gradle任务"><a href="#gradle任务" class="headerlink" title="gradle任务"></a>gradle任务</h4><p>gradle中有一个核心概念叫任务，跟maven中的插件目标类似。<br>gradle的android插件提供了四个顶级任务<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">assemble 构建项目输出</span><br><span class="line">check 运行检测和测试任务</span><br><span class="line">build 运行assemble和check</span><br><span class="line">clean 清理输出任务</span><br></pre></td></tr></table></figure></p>
+<p>执行任务可以通过gradle/gradlew+任务名称的方式执，执行一个顶级任务会同时执行与其依赖的任务，比如你执行<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradlew assemble</span><br></pre></td></tr></table></figure></p>
+<p>它通常会执行:<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gradlew assembleDebug</span><br><span class="line">gradlew assembleRelease</span><br></pre></td></tr></table></figure></p>
+<p>这时会在你项目的build/outputs/apk或者build/outputs/aar目录生成输出文件<br><code>gradlew assemble</code>命令只能执行主module的编译任务，如果只想单独编译某一个module可以使用<code>-p</code>参数来指定：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradlew -p module-a assembleDebug</span><br></pre></td></tr></table></figure></p>
+<p>可以通过：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradlew tasks</span><br></pre></td></tr></table></figure></p>
+<p>列出所有可用的任务。在Android Studio中可以打开右侧gradle视图查看所有任务。</p>
+<p>有一个命令可以很方便的列出工程的依赖关系：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gradle module-a:<span class="keyword">dependencies</span> --configuration <span class="keyword">compile</span></span><br></pre></td></tr></table></figure></p>
+<p>这样就能知module-a编译的依赖项了。</p>
+<h3 id="工程配置"><a href="#工程配置" class="headerlink" title="工程配置"></a>工程配置</h3><p>　　了解过gradle的基本配置之后，我们就可以来看看gradle在Android Studio的具体应用了。</p>
+<h4 id="基本配置"><a href="#基本配置" class="headerlink" title="基本配置"></a>基本配置</h4><p>　　下面的这份清单是一个比较详细的build.gradle配置文件，包含了buildType、flavor、定义资源目录、multiDex相关等细节。完全可以满足平常一般的使用需求<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//说明module的类型，com.android.application为程序，com.android.library为库</span></span><br><span class="line">apply plugin: <span class="string">'com.android.application'</span></span><br><span class="line"></span><br><span class="line">android &#123;</span><br><span class="line">    <span class="comment">//编译的SDK版本</span></span><br><span class="line">    compileSdkVersion <span class="number">22</span></span><br><span class="line">    <span class="comment">//编译的Tools版本</span></span><br><span class="line">    buildToolsVersion <span class="string">"22.0.1"</span></span><br><span class="line">    <span class="comment">//默认配置</span></span><br><span class="line">    defaultConfig &#123;</span><br><span class="line">        <span class="comment">//应用程序的包名</span></span><br><span class="line">        applicationId <span class="string">"com.xxx.xxx"</span></span><br><span class="line">        <span class="comment">//支持的最低版本</span></span><br><span class="line">        minSdkVersion <span class="number">14</span></span><br><span class="line">        <span class="comment">//支持的目标版本</span></span><br><span class="line">        targetSdkVersion <span class="number">19</span></span><br><span class="line">        <span class="comment">//版本号</span></span><br><span class="line">        versionCode <span class="number">100200200</span></span><br><span class="line">        <span class="comment">//版本名</span></span><br><span class="line">        versionName <span class="string">"1.2.2"</span></span><br><span class="line">        <span class="comment">// 单元测试相关的配置</span></span><br><span class="line">        testInstrumentationRunner <span class="string">"android.support.test.runner.AndroidJUnitRunner"</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//关闭Android Studio的PNG合法性检查的</span></span><br><span class="line">    aaptOptions.cruncherEnabled = <span class="keyword">false</span></span><br><span class="line">    aaptOptions.useNewCruncher = <span class="keyword">false</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//目录指向配置,比如从Eclipse迁过来的代码，和AS的文件位置不同，就需要手动设置</span></span><br><span class="line">    <span class="keyword">sourceSets</span> &#123;</span><br><span class="line"></span><br><span class="line">        main &#123;</span><br><span class="line">            <span class="comment">//指定AndroidManifest文件</span></span><br><span class="line">            manifest.srcFile <span class="string">'AndroidManifest.xml'</span></span><br><span class="line">            <span class="comment">//指定source目录</span></span><br><span class="line">            java.srcDirs = [<span class="string">'src'</span>]</span><br><span class="line">            <span class="comment">//指定source目录</span></span><br><span class="line">            resources.srcDirs = [<span class="string">'src'</span>]</span><br><span class="line">            <span class="comment">//指定source目录</span></span><br><span class="line">            aidl.srcDirs = [<span class="string">'src'</span>]</span><br><span class="line">            <span class="comment">//指定source目录</span></span><br><span class="line">            renderscript.srcDirs = [<span class="string">'src'</span>]</span><br><span class="line">            <span class="comment">//指定资源目录</span></span><br><span class="line">            res.srcDirs = [<span class="string">'res'</span>]</span><br><span class="line">            <span class="comment">//指定assets目录</span></span><br><span class="line">            assets.srcDirs = [<span class="string">'assets'</span>]</span><br><span class="line">            <span class="comment">//指定lib库目录</span></span><br><span class="line">            jniLibs.srcDirs = [<span class="string">'libs'</span>]</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//指定debug模式的路径</span></span><br><span class="line">        debug.setRoot(<span class="string">'build-types/debug'</span>)</span><br><span class="line">        <span class="comment">//指定release模式的路径</span></span><br><span class="line">        release.setRoot(<span class="string">'build-types/release'</span>)</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//签名配置</span></span><br><span class="line">    signingConfigs &#123;</span><br><span class="line">        <span class="comment">//发布版签名配置</span></span><br><span class="line">        release &#123;</span><br><span class="line">            <span class="comment">//密钥文件路径</span></span><br><span class="line">            storeFile <span class="keyword">file</span>(<span class="string">"xxx.keystore"</span>)</span><br><span class="line">            <span class="comment">//密钥文件密码</span></span><br><span class="line">            storePassword <span class="string">"xxx"</span></span><br><span class="line">            <span class="comment">//key别名</span></span><br><span class="line">            keyAlias <span class="string">"xxx"</span></span><br><span class="line">            <span class="comment">//key密码</span></span><br><span class="line">            keyPassword <span class="string">"xxx"</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//debug版签名配置</span></span><br><span class="line">        debug &#123;</span><br><span class="line"></span><br><span class="line">            <span class="comment">//密钥文件路径，可以跟release配置不同的密钥路径</span></span><br><span class="line">            storeFile <span class="keyword">file</span>(<span class="string">"xxx.keystore"</span>)</span><br><span class="line">            <span class="comment">//密钥文件密码</span></span><br><span class="line">            storePassword <span class="string">"xxx"</span></span><br><span class="line">            <span class="comment">//key别名</span></span><br><span class="line">            keyAlias <span class="string">"xxx"</span></span><br><span class="line">            <span class="comment">//key密码</span></span><br><span class="line">            keyPassword <span class="string">"xxx"</span></span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//build类型</span></span><br><span class="line">    buildTypes &#123;</span><br><span class="line">        <span class="comment">//发布</span></span><br><span class="line">        release &#123;</span><br><span class="line">            <span class="comment">//在编译时生成一些静态变量，这样就会在BuildConfig类中生成type字段，当然gradle默认会在BuildConfig中生成一些默认字段</span></span><br><span class="line">            buildConfigField <span class="string">"string"</span>,<span class="string">"type"</span>,<span class="string">"release"</span></span><br><span class="line">            <span class="comment">//是否支持zip</span></span><br><span class="line">            zipAlignEnabled <span class="keyword">true</span></span><br><span class="line">            <span class="comment">// 移除无用的resource文件</span></span><br><span class="line">            shrinkResources <span class="keyword">true</span></span><br><span class="line">            <span class="comment">//是否支持调试</span></span><br><span class="line">            debuggable <span class="keyword">false</span></span><br><span class="line">            <span class="comment">//混淆开启</span></span><br><span class="line">            minifyEnabled <span class="keyword">true</span></span><br><span class="line">            <span class="comment">//指定混淆规则文件</span></span><br><span class="line">            proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-project.txt'</span></span><br><span class="line">            <span class="comment">//设置签名信息</span></span><br><span class="line">            signingConfig signingConfigs.release</span><br><span class="line">            <span class="comment">//设置ndk支持平台</span></span><br><span class="line">            ndk &#123;</span><br><span class="line">                abiFilters <span class="string">"armeabi"</span>, <span class="string">"x86"</span></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//调试</span></span><br><span class="line">        debug &#123;</span><br><span class="line">            <span class="comment">//在编译时生成一些静态变量，这样就会在BuildConfig类中生成type字段，当然gradle默认会在BuildConfig中生成一些默认字段</span></span><br><span class="line">            buildConfigField <span class="string">"string"</span>,<span class="string">"type"</span>,<span class="string">"debug"</span></span><br><span class="line">            <span class="comment">//混淆不开启</span></span><br><span class="line">            minifyEnabled <span class="keyword">false</span></span><br><span class="line">            <span class="comment">//设置签名信息</span></span><br><span class="line">            signingConfig signingConfigs.debug</span><br><span class="line">            <span class="comment">//设置ndk支持平台</span></span><br><span class="line">            ndk &#123;</span><br><span class="line">                abiFilters <span class="string">"armeabi"</span>, <span class="string">"x86"</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 打包时的相关配置。当项目中依赖的第三方库越来越多时，有可能会出现两个依赖库中存在同一个（名称）文件。</span></span><br><span class="line">    <span class="comment">// 如果这样，Gradle在打包时就会提示错误（警告）。那么就可以根据提示，然后使用以下方法将重复的文件剔除。</span></span><br><span class="line">    packagingOptions &#123;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">exclude</span> <span class="string">'META-INF/ASL2.0'</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">exclude</span> <span class="string">'META-INF/LICENSE'</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">exclude</span> <span class="string">'META-INF/NOTICE'</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">exclude</span> <span class="string">'META-INF/MANIFEST.MF'</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    lintOptions &#123;</span><br><span class="line">        <span class="comment">//lint时候终止错误上报,防止编译的时候莫名的失败</span></span><br><span class="line">        abortOnError <span class="keyword">false</span></span><br><span class="line">        <span class="comment">//打包release版本的时候是否进行检测</span></span><br><span class="line">        checkReleaseBuilds <span class="keyword">false</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// multiDex的一些相关配置，这样配置可以让你的编译速度更快</span></span><br><span class="line">    dexOptions &#123;</span><br><span class="line">        <span class="comment">// 让它不要对Lib做preDexing</span></span><br><span class="line">        preDexLibraries = <span class="keyword">false</span></span><br><span class="line">        <span class="comment">// 开启incremental dexing,优化编译效率，这个功能android studio默认是关闭的。</span></span><br><span class="line">        incremental <span class="keyword">true</span></span><br><span class="line">        <span class="comment">// 设置java堆内存大小</span></span><br><span class="line">        javaMaxHeapSize <span class="string">"4g"</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 设置产品特性，即多渠道打包的东西，比如不同的应用名，图标、AndroidManifest.xml</span></span><br><span class="line">    <span class="comment">// 配合manifest merger使用的时候就可以达成在一次编译过程中产生多个具有自己特性配置的版本。</span></span><br><span class="line">    productFlavors &#123;</span><br><span class="line">        xiaomi &#123;</span><br><span class="line">            <span class="comment">// 渠道包配置</span></span><br><span class="line">            manifestPlaceholders = [UMENG_CHANNEL_VALUE: <span class="string">"xiaomi"</span>]     </span><br><span class="line">            manifest.srcFile <span class="string">'exampleapk/AndroidManifest1.xml'</span></span><br><span class="line">            applicationId <span class="string">"com.xxx.xxx.xiaomi"</span></span><br><span class="line">        &#125;</span><br><span class="line">        googlePlay &#123;</span><br><span class="line">            applicationId <span class="string">"com.xxx.xxx.googleplay"</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// productFlavors的批量方法，类似一个循序遍历作用。</span></span><br><span class="line">    productFlavors.all &#123;</span><br><span class="line">        flavor -&gt; flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//配置自定义打包名称</span></span><br><span class="line">    applicationVariants.all &#123; variant -&gt;</span><br><span class="line">        variant.outputs.<span class="keyword">each</span> &#123; output -&gt;</span><br><span class="line">            <span class="keyword">def</span> flavor = variant.productFlavors[<span class="number">0</span>].name</span><br><span class="line">            <span class="keyword">def</span> build_type = variant.buildType.name</span><br><span class="line">            output.outputFile = <span class="keyword">new</span> <span class="keyword">File</span>(</span><br><span class="line">                    output.outputFile.parent,</span><br><span class="line">                    <span class="string">"apkname_$&#123;flavor&#125;_$&#123;build_type&#125;_$&#123;variant.versionName&#125;.apk"</span>.toLowerCase())</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     <span class="comment">// java版本</span></span><br><span class="line">    compileOptions &#123;</span><br><span class="line">        <span class="keyword">sourceCompatibility</span> JavaVersion.VERSION_1_7</span><br><span class="line">        <span class="keyword">targetCompatibility</span> JavaVersion.VERSION_1_7</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//占位编译lib下所有jar包</span></span><br><span class="line">    provided <span class="keyword">fileTree</span>(<span class="keyword">include</span>: [<span class="string">'*.jar'</span>], dir: <span class="string">'lib'</span>)</span><br><span class="line">    <span class="comment">//占位编译xxx.jar</span></span><br><span class="line">    provided files(<span class="string">'../xxx.jar'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment">//编译lib目录下的.jar文件</span></span><br><span class="line">    <span class="keyword">compile</span> <span class="keyword">fileTree</span>(dir: <span class="string">'libs'</span>, <span class="keyword">exclude</span>: [<span class="string">'android-support*.jar'</span>], <span class="keyword">include</span>: [<span class="string">'*.jar'</span>])</span><br><span class="line">    <span class="comment">//编译附加的项目</span></span><br><span class="line">    <span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':module-a'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':module-b'</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">compile</span> <span class="keyword">project</span>(<span class="string">':module-c'</span>)</span><br><span class="line">    <span class="comment">//编译第三方开源库</span></span><br><span class="line">    <span class="keyword">compile</span> <span class="string">'com.nostra13.universalimageloader:universal-image-loader:1.9.3'</span></span><br><span class="line">    <span class="comment">//设置缓存时间，0即不缓存</span></span><br><span class="line">    <span class="keyword">configurations</span>.all &#123;</span><br><span class="line">      resolutionStrategy.cacheChangingModulesFor(<span class="number">0</span>, <span class="string">'seconds'</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>基本配置的精华都在上面代码段中，仔细阅读。</p>
+
+        
+    
+
+    
+</div>
+
+
+                    
+
+                    <!-- Post Comments -->
+                    
+                        
+    <style>
+	.comment-padding{
+		padding:40px;
+	}
+
+	@media screen and (max-width: 480px){
+		.comment-padding{
+			padding:5px;
+		}
+	}
+</style>
+
+<div id="comment" class="vcomment comment-padding"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'true' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "0sCUN38EBFYznhxrMgsQ9DUa-gzGzoHsz",
+        appKey: "q9GMqQkjVN7jWkscuy53XJU5",
+        placeholder: "来吧，互相伤害吧！",
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info
+    });
+</script>
+
+                    
+                </div>
+
+                <!-- Post Prev & Next Nav -->
+                <style>
+
+    .nav_text {
+        /* color: #0097A7; */
+    }
+
+    .nav_text:hover{
+        text-decoration: underline
+    }
+</style>
+<nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <div>
+            <a href="/2016/05/30/gradle/Gradle高级使用/" id="post_nav-newer" class="prev-content nav_text">
+                <button style="margin-bottom:5px" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                    <i style="padding-top:1.5px;" class="material-icons">arrow_back</i>
+                </button>
+                <span style="margin-left:7px" class="nav_text">上一篇</span>
+                <div>
+                    <h5 style="margin-top:12px" class="nav_text">Gradle高级使用</h5> 
+                </div>
+            </a>  
+        </div>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <div style="text-align:right">
+            <a href="/2016/05/19/gradle/gradle简介/" id="post_nav-older" class="next-content nav_text">
+                <span style="margin-right:7px" class="nav_text">下一篇</span>
+                <button style="margin-bottom:5px" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                    <i style="padding-top:1.5px" class="material-icons">arrow_forward</i>
+                </button>
+                <div>
+                    <h5 style="margin-top:12px" class="nav_text">Gradle简介</h5>
+                </div>
+            </a>
+        </div>
+    
+</nav>
+
+            </div>
+
+            <!-- Post TOC -->
+            
+                <aside> 
+                    <nav class="post-toc-wrap top" id="post-toc">
+                        <h4>目录</h4>
+                        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#基本知识"><span class="post-toc-number">1.</span> <span class="post-toc-text">基本知识</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#认识build-gradle"><span class="post-toc-number">1.1.</span> <span class="post-toc-text">认识build.gradle</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#认识gradle-properties"><span class="post-toc-number">1.2.</span> <span class="post-toc-text">认识gradle.properties</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#认识settings-gradle"><span class="post-toc-number">1.3.</span> <span class="post-toc-text">认识settings.gradle</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#gradle文件夹"><span class="post-toc-number">1.4.</span> <span class="post-toc-text">gradle文件夹</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#gradlew和gradlew-bat"><span class="post-toc-number">1.5.</span> <span class="post-toc-text">gradlew和gradlew.bat</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#gradle仓库"><span class="post-toc-number">1.6.</span> <span class="post-toc-text">gradle仓库</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#gradle任务"><span class="post-toc-number">1.7.</span> <span class="post-toc-text">gradle任务</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#工程配置"><span class="post-toc-number">2.</span> <span class="post-toc-text">工程配置</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#基本配置"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">基本配置</span></a></li></ol></li></ol>
+                    </nav>                  
+                    </aside>
+            
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image" style="margin-top: 50px;">
+        <img src="/img/seasonfif.JPG" alt="第五季's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/categories" title="分类">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                标签
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+        <li>
+            <a href="/archive" title="归档">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                归档
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/gallery" title="画廊">
+                
+                    <i class="material-icons sidebar-material-icons">camera</i>
+                
+                画廊
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+    <a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+        sidebar.help
+        <span class="mdl-button__ripple-container">
+          <span class="mdl-ripple"></span>
+        </span>
+      </div>
+    </a>
+
+-->
+
+<!-- Feedback -->
+<!--
+
+    <a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+        sidebar.feedback
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+    </a>
+
+-->
+
+<!-- About Theme -->
+<!--
+
+    <a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+             sidebar.about_theme
+            <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+    </a>
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <style>
+    .toTop{
+        width: 50px;
+        height: 50px;
+        background:#ff4081 !important;
+    }
+
+    .toTop i{
+        margin: 13px;
+    }
+</style>
+
+<div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<style>
+    .mdl-mini-footer{
+        background: #0097A7 !important;
+        color: #BDBDBD !important;
+    }
+
+    .mdl-mini-footer--right-section a{
+        color: #BDBDBD !important;
+    }
+
+    .footer-develop-a:hover {
+        color: #FF80AB !important;
+        text-decoration: underline !important;
+    }
+
+</style>
+
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="https://weibo.com/seasonfif" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/seasonfif" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;2015&nbsp;-<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>seasonfif | 第五季
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?agMErfJdjr2Eo0sH0O7qfA==", true)</script>
+
+
+<script>lsloader.load("jm_js","/js/jquery.leanModal.min.js?AQf83Rf/eF1HhfnKwwRVhQ==", true)</script>
+<script>lsloader.load("th_js","/js/top-header.js?7u6LuV7zuY6czvmlnc9JpQ==", true)</script>
+
+    <script>lsloader.load("blog_js","/js/blog.js?gyllcJH6iU25FXAVNTR3YQ==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+    
+        <script>lsloader.load("sm_js","/js/smoothscroll.js?lOy/ACj5suSNi7ZVFVbpFQ==", true)</script>
+    
+
+
+
+    <!-- Leancloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+    <script>
+        AV.initialize('0sCUN38EBFYznhxrMgsQ9DUa-gzGzoHsz', 'q9GMqQkjVN7jWkscuy53XJU5');
+    </script>
+    <script type="text/ls-javascript" id="leancloud-views-script">
+    function showTime(Counter) {
+        var query = new AV.Query(Counter);
+        $('.leancloud-views_num').each(function() {
+            var url = $(this).attr('id').trim();
+            query.equalTo('url', url);
+            query.find({
+                success: function(results) {
+                    if (results.length === 0) {
+                        var content = '0 ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                        return;
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    }
+                },
+                error: function(object, error) {
+                    console.log('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        });
+    }
+
+    function addCount(Counter) {
+      var Counter = AV.Object.extend('Counter');
+      url = $('.leancloud-views_num').attr('id').trim();
+      title = $('.leancloud-views_num').attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+      query.equalTo('url', url);
+      query.find({
+          success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment('time');
+                counter.save(null, {
+                    success: function(counter) {
+                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+              var newcounter = new Counter();
+              newcounter.set('title', title);
+              newcounter.set('url', url);
+              newcounter.set('time', 1);
+              newcounter.save(null, {
+                  success: function(newcounter) {
+                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
+                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+                      $(document.getElementById(url)).text(content);
+                  },
+                  error: function(newcounter, error) {
+                      console.log('Failed to create');
+                  }
+              });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + ' ' + error.message);
+        }
+      });
+    }
+    $(function() {
+        var Counter = AV.Object.extend('Counter');
+        if ($('.leancloud-views_num').length === 1) {
+            addCount(Counter);
+        } else if ($('.post-title-link').length > 1) {
+            showTime(Counter);
+        }
+    });
+</script>
+
+
+
+
+
+
+   
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

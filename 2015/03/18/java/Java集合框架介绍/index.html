@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.2 -->
+    <script>
+        window.materialVersion = "1.5.2"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+    <link rel="dns-prefetch" href="https://cdn1.lncld.net"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            Java集合框架介绍 | 
+        
+        seasonfif | 第五季
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/seasonfif.JPG">
+    <link rel="icon" href="/img/seasonfif.JPG">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content=""/>
+    <meta name="keywords" content=",数据结构"/>
+    <meta name="theme-color" content="#0097A7"/>
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?OIqfivxywtwaQrjrKubNQg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?dHwxgeJO7kQ9iS02XSHaDA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="seasonfif | 第五季">
+    <meta name="msapplication-starturl" content="https://seasonfif.github.io/2015/03/18/java/Java集合框架介绍/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="seasonfif | 第五季">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/seasonfif.JPG">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://seasonfif.github.io/2015/03/18/java/Java集合框架介绍/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Java集合框架介绍 | seasonfif | 第五季">
+    <meta property="og:image" content="/img/seasonfif.JPG">
+    <meta property="og:description" content="">
+    <meta property="og:article:tag" content="数据结构"> 
+
+    
+        <meta property="article:published_time" content="Wed Mar 18 2015 16:16:26 GMT+0800">
+        <meta property="article:modified_time" content="Fri May 29 2020 11:53:03 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://seasonfif.github.io/2015/03/18/java/Java集合框架介绍/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://seasonfif.github.io/2015/03/18/java/Java集合框架介绍/index.html",
+    "headline": "Java集合框架介绍",
+    "datePublished": "Wed Mar 18 2015 16:16:26 GMT+0800",
+    "dateModified": "Fri May 29 2020 11:53:03 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "第五季",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/seasonfif.JPG"
+        },
+        "description": "陌上人如玉 ,,第五季的博客 "
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "seasonfif | 第五季",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/seasonfif.JPG"
+        }
+    },
+    "keywords": ",数据结构",
+    "description": "",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-111267309-1', 'auto');ga('send', 'pageview');
+</script>
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                <style>
+
+    .header_content{
+        width: 100%;
+        height: 220px;
+        background: #0097A7;
+        box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
+    }
+
+    .top-header {
+        /* position: fixed; */
+        left: 0;
+        top: 0;
+        width: 100%;
+        color: #0097A7;
+        height: 56px;
+        background: #0097A7;
+        -webkit-transition: padding-left .6s ease-in-out, background-color .3s cubic-bezier(.4,0,.2,1), box-shadow .15s linear;
+        transition: padding-left .6s ease-in-out, background-color .3s cubic-bezier(.4,0,.2,1), box-shadow .15s linear;
+        /* transition: all 1500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; */
+        z-index: 1;
+    }
+    .top-header.fixed {
+        position: fixed;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    }
+    .top-header.fixed .header-title {
+        visibility: visible;
+    }
+
+    /* flex布局  */
+    .flex-row,
+    .flex-column,
+    .flex-row-vertical {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display:         flex;
+        -webkit-align-items: center; 
+        align-items: center;
+    }
+
+    .MD-burger-layer {
+        background: white !important;
+    }
+
+    .MD-burger-icon- {
+        margin: 0 0 0 1pc;
+        cursor: pointer;
+        border: none;
+        background: 0 0;
+        outline: 0;
+        top: 2pc;
+        z-index: 0;
+        height: 2pc;
+        width: 2pc;
+    }
+
+    .header-icon {
+        width: 56px;
+        height: 56px;
+        line-height: 56px;
+        text-align: center;
+        color: white;
+    }
+
+    .flex-col {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+    }
+    .ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+
+<div class="header_content" id="header">
+    <header class="top-header" id="header_top">
+        <div class="flex-row">
+
+            <!-- Hamburger Button -->
+            <button class="MD-burger-icon- sidebar-toggle">
+                <span class="MD-burger-layer"></span>
+            </button>
+
+            <div class="flex-col header-title ellipsis"></div>
+
+            <a style="margin-right: 5px;" class="menu-search modal-trigger" href="#search">
+                <i style="margin: 13px;" class="material-icons mdl-color-text--white" role="presentation">search</i>
+            </a>
+        </div>
+    </header>
+
+    <style>
+    #lean_overlay {  
+        position: fixed;  
+        z-index:1;
+        top: 0px;  
+        left: 0px;  
+        height:100%;  
+        width:100%;  
+        background: #000;  
+        display: none;  
+    }
+
+    .modal {
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      background-color: #fafafa;
+      padding: 0;
+      max-height: 70%;
+      width: 55%;
+      margin: 0 auto;
+      overflow-y: auto;
+      border-radius: 2px;
+      will-change: top, opacity;
+      box-shadow: 0 16px 28px 0 rgba(0,0,0,0.22),0 25px 55px 0 rgba(0,0,0,0.21);
+    }
+
+    .search-modal {
+      padding: 10px 0 30px 0;
+      max-height: 80%;
+    }
+
+    .modal-bg{
+      background-color: rgb(204, 232, 207);
+      z-index: 9999;
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .row {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        padding: 0px 15px;
+    }
+
+    .row .col.s12 {
+        width: 100%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+    .row .col {
+        float: left;
+        box-sizing: border-box;
+        padding: 0 0.75rem;
+    }
+    .input-field {
+        position: relative;
+        margin-top: 1rem;
+    }
+
+
+    input[type=text]
+    :focus {
+      border-bottom-color: #757575;
+      box-shadow: 0 1px 0 0 #757575;
+    }
+    input[type=text]
+    :focus+label {
+      color: #212121;
+    }
+    .search-modal .search-result {
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
+    .mdl-textfield__input {
+        color: #0097A7;
+    }
+</style>
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+            <span id="search-input-title" style="display:block; margin-bottom:7px;"><label for="search-input">搜索</label></span>
+            <input id="search-input" class="mdl-textfield__input search-input" type="search" placeholder="">   
+        </div>
+    </div>
+    <div id="local-search-result" class="search-result col s12">
+    </div>
+</div>
+</div>
+
+
+
+                <style>
+                    .material-layout__content{
+                        margin-top: -130px !important;
+                        padding-top: 0px !important;
+                    }
+                </style>
+                
+                
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    <!-- Layouts -->
+
+    <style>
+        .mdl-card:hover {
+            box-shadow:0px 20px 20px rgba(0,0,0,.156863),0 3px 10px rgba(0,0,0,.227451);
+        }
+
+        .material-post_container {
+            display: flex;
+            flex-flow: row;
+            flex-wrap: nowrap;
+        }
+
+        .material-post{
+            max-width: 768px !important;
+            width: 100%;
+            margin: 0 0 0 0 !important;
+        }
+
+        .center-container{
+            display: flex;
+            flex-flow: row;
+            flex-wrap: nowrap;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 768px;
+            
+                max-width: 900px;
+            
+        }
+        
+        /* 目录样式 */
+        .post-toc-wrap {
+        position: fixed;
+        margin-left: 50px;
+        overflow-x: hidden;
+        }
+        .post-toc-wrap.top{
+            margin-top: 150px;
+        }
+        .post-toc-wrap.fixed {
+        top: 0px;
+        bottom: 140px;
+        overflow-y: auto;
+        }
+        .post-toc-wrap ol,
+        .post-toc-wrap ul {
+        list-style: none;
+        margin: 0;
+        }
+        .post-toc-wrap h4 {
+        padding: 0 0 0px 20px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #727272;
+        }
+
+        .post-toc-child {
+        padding-left: 10px;
+        }
+        .post-toc {
+            width: auto;
+            word-wrap: normal;
+            white-space: nowrap;
+            padding: 0;
+            list-style: none;
+            padding: 0 7px;
+        }
+
+        .post-toc a:hover {
+            color: #ff4081;
+            text-decoration: underline;
+        }
+        .post-toc >.post-toc-item {
+        position: relative;
+        }
+        .post-toc-item {
+        font-weight: 400;
+        color: #ff4081;
+        }
+        .post-toc-item.active >.post-toc-link {
+        font-weight: 600;
+        color: #ff4081;
+        }
+        .post-toc-item.active >.post-toc-link:before {
+        background: rgba(0,0,0,0.06);
+        }
+        .post-toc-item.active >.post-toc-link:after {
+        border-left: 3px solid #ff4081;
+        }
+        .post-toc-link {
+        position: relative;
+        z-index: 2;
+        display: block;
+        padding: 3px 20px;
+        line-height: 1.5rem;
+        color: inherit;
+        word-break: break-all;
+        }
+        .post-toc-link:hover {
+        opacity: .8;
+        }
+        .post-toc-link:before,
+        .post-toc-link:after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        }
+    </style>
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="center-container">
+            <div class="material-post mdl-grid">
+                <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                    <!-- Post Header(Thumbnail & Title) -->
+                    
+    <!-- Paradox Post Header -->
+    
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(https://raw.githubusercontent.com/seasonfif/picture/master/other/map-mark.jpg)">
+    
+            <p class="article-headline-p">
+                Java集合框架介绍
+            </p>
+        </div>
+
+
+
+
+
+                    
+                        <!-- Paradox Post Info -->
+                        <style>
+    .worldcount_content{
+        margin-left:25px;
+    }
+
+    @media screen and (max-width: 480px) {
+      .worldcount_content {
+        margin-left:5px
+      }
+  }
+</style>
+
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/seasonfif.JPG" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>第五季</strong>
+        <span>2015.3.18</span>
+    </div>
+
+    <div class="worldcount_content">
+        <span class="post-count">字数：3,287字</span>
+        <span class="post-count">时长：13分钟</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/datastruct/">数据结构</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-functions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="weixin-qrcode-button">
+    <li class="mdl-menu__item">微信扫一扫分享</li>
+    
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAACz0lEQVR42u3aS1LDMBAFwNz/0nABMG+eHMqRWisqOLJai0zN5/V15HphY2NjY2NjY2NjP5L9itcPG/3yzPXzyTPXb+/OjI2Njb03+4+f/ssXX8OuP8nPcMOZsbGxsQ9gJwHpfcEpucTuzNjY2NjYCSnZ7Xr/QVKBjY2Njb3MTgo9SVhKdnhQAMPGxsZ+PHsalu49+rQ98K+1NGxsbOzHs6dpwxP+/tf+NjY2NvaD2dOVNH3zINcFv/Lk2NjY2Juy88Bw7wUlrYKVfbCxsbHPYXdDOdNyf35NeYN5isfGxsY+gb0y7NiRuivrgi42Njb23uyVos80keiCXLczNjY29jnsblxyGqjyQZ/1Fi82Njb2aewuPUguqBsAypsNN8RtbGxs7I3Y+dGnhadk0Cd/47RVjI2NjX0Ce9AujZONpNiUj1oOUo6u0YuNjY39sezky12DNhqIjINlV9LCxsbGPoE9LQBNU5G7vtvtjI2NjX0Ou2v0TpuySdDKU5dpuQobGxv7NHaSQiRpSR4m86QoClfY2NjYh7E7Xnfc7vlpSjPIwLCxsbG3YOfl+DyEdIlNvk/+X2xsbOyT2d1ITQLuhji7cIiNjY29N7truL5vrSQqg/YANjY29kbspEjUhZC8CdFdcR4gsbGxsfdm5+M40yvIr2OliTvYHxsbG/sYdn70aXKyMhzfXT02Njb2mez8OqIEYGGIc2UofyluY2NjY38sOw9mefmpSzNW1lKjFxsbG/sD2fc2YqfgPChOi19/BDBsbGzsjdjTwDAtEk3LUnlakl8iNjY29gnsaVm/K/TfFfZuC2DY2NjY27FXGgDdGGVS3O9KWuNaGjY2NvaR7LzhOh2ymbaZo+vDxsbGxg6o3RHz4aE8ccLGxsY+k50nDHcFoZWC1DigYmNjY2/NXhmv7Mo9XeqSN5WxsbGxz2Gfs7CxsbGxsbGxsbEfs74Bxs25zNWLbUUAAAAASUVORK5CYII=">
+    
+</ul>
+
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2015/03/18/java/Java集合框架介绍/" class="leancloud-views_num" data-flag-title="Java集合框架介绍">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weixin -->
+    
+        <a id="weixin-qrcode-button" class="post_share-link" href="javascript:void(0);">
+            <li class="mdl-menu__item" role="presentation">
+                分享到微信
+            </li>
+        </a>
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Java集合框架介绍&url=https://seasonfif.github.io/2015/03/18/java/Java集合框架介绍/index.html&pic=https://seasonfif.github.io/img/seasonfif.JPG&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=seasonfif | 第五季&title=Java集合框架介绍&summary=&pics=https://seasonfif.github.io/img/seasonfif.JPG&url=https://seasonfif.github.io/2015/03/18/java/Java集合框架介绍/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+    
+</div>
+
+                    
+                    
+                    <!-- Post Content -->
+                    <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="集合框架概览"><a href="#集合框架概览" class="headerlink" title="集合框架概览"></a>集合框架概览</h2><p>　　Java集合框架由一套设计优良的接口和类组成。高度的封装使我们操作多个数据或对象元素极为方便。所有的Java集合都在java.util包中。<br>　　在编写程序的过程中，使用到集合类，要根据不同的需求，来决定使用哪种集合类，比如，要经常遍历集合内元素，就要使用List，如果要保证集合中不存在重复的数据，就要用Set;如果要通过某一键来查找某一值，就要使用Map。<br>Java中集合类主要有两大分支：</p>
+<ol>
+<li>Collection</li>
+<li>Map</li>
+</ol>
+<h2 id="Collection接口"><a href="#Collection接口" class="headerlink" title="Collection接口"></a>Collection接口</h2><p>Colloction接口继承关系<br><img src="https://raw.githubusercontent.com/seasonfif/picture/master/other/collection-mark.jpg" alt="Collection"><br>详细的类图结构<br><img src="https://raw.githubusercontent.com/seasonfif/picture/master/other/java-collection.png" alt="Collection"></p>
+<h3 id="1、接口定义"><a href="#1、接口定义" class="headerlink" title="1、接口定义"></a>1、接口定义</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Collection</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">Iterable</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">contains</span><span class="params">(Object var1)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">Iterator&lt;E&gt; <span class="title">iterator</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  Object[] toArray();</span><br><span class="line"></span><br><span class="line">  &lt;T&gt; T[] toArray(T[] var1);</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">add</span><span class="params">(E var1)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object var1)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">containsAll</span><span class="params">(Collection&lt;?&gt; var1)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">addAll</span><span class="params">(Collection&lt;? extends E&gt; var1)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">removeAll</span><span class="params">(Collection&lt;?&gt; var1)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> <span class="keyword">boolean</span> <span class="title">removeIf</span><span class="params">(Predicate&lt;? <span class="keyword">super</span> E&gt; var1)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">retainAll</span><span class="params">(Collection&lt;?&gt; var1)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object var1)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> Spliterator&lt;E&gt; <span class="title">spliterator</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> Stream&lt;E&gt; <span class="title">stream</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> Stream&lt;E&gt; <span class="title">parallelStream</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2、Set实现类"><a href="#2、Set实现类" class="headerlink" title="2、Set实现类"></a>2、Set实现类</h3><p>Set<br>　　该类中的元素不按特定方式排序，只是简单的把对象加入集合中，就像往口袋里放东西。<br>对Set中成员的访问和操作是通过Set中对象的引用进行的，所以集中不能有重复对象。<br>　　Set也有多种变体，可以实现排序等功能，如TreeSet，它把对象添加到集中的操作将变为按照某种比较规则将其插入到有序的对象序列中。它实现的是SortedSet接口，也就是加入了对象比较的方法。通过对集中的对象迭代，我们可以得到一个升序的对象集合。<br>HashSet<br>　　能够快速定位一个元素，要注意的是：存入HashSet中的对象必须实现HashCode()方法；<br>TreeSet<br>　　将放入其中的元素按序存放。</p>
+<h3 id="3、Queue实现类"><a href="#3、Queue实现类" class="headerlink" title="3、Queue实现类"></a>3、Queue实现类</h3><p>Queue<br>　　用于模拟队列这种数据结构。队列通常是指“先进先出（FIFO）”的容器。队列的头部保存在队列中存放时间最长的元素，尾部保存存放时间最短的元素。新元素插入到队列的尾部，取出元素会返回队列头部的元素。通常，队列不允许随机访问队列中的元素。<br>PriorityQueue<br>　　保存队列元素的顺序不是按照元素添加的顺序来保存的，而是在添加元素的时候对元素的大小排序后再保存的。因此在PriorityQueue中使用peek()或pool()取出队列中头部的元素，取出的不是最先添加的元素，而是最小的元素。<br>Deque<br>　　该接口是Queue接口的子接口，它代表一个双端队列。<br>ArrayDeque<br>　　该类是Deque接口的实现类，ArrayDeque采用了循环数组的方式来完成双端队列的功能。</p>
+<ol>
+<li>无限的扩展，自动扩展队列大小的。（当然在不会内存溢出的情况下。）</li>
+<li>非线程安全的，不支持并发访问和修改。</li>
+<li>支持fast-fail.</li>
+<li>作为栈使用的话比比栈要快.</li>
+<li>当队列使用比linklist要快。</li>
+<li>null元素被禁止使用。</li>
+</ol>
+<h3 id="4、List实现类"><a href="#4、List实现类" class="headerlink" title="4、List实现类"></a>4、List实现类</h3><p>List<br>　　该接口及其实现类是容量可变的列表，可按索引访问集合中的元素。<br>列表在数据结构中分别表现为：数组和向量、链表、堆栈、队列。<br>ArrayList<br>　　实现一个数组，它的规模可变并且能像链表一样被访问。它提供的功能类似Vector类但不同步，它是以Array方式实现的List，允许快速随机存取。<br>LinkedList<br>　　实现一个链表，提供最佳顺序存取，适合插入和移除元素。由这个类定义的链表也可以像栈或队列一样被使用。提供最佳顺序存取，适合插入和移除元素。LinkedList与ArrayList，ArrayDeque的实现机制完全不同，ArrayList和ArrayDeque内部以数组的形式来保存集合中的元素，因此随机访问集合元素时有较好的性能；而LinkedList以链表的形式来保存集合中的元素，因此随机访问集合元素时性能较差，但是插入和删除元素时性能比较出色（只需改变指针所指的地址即可），需要指出的是，虽然Vector也是以数组的形式来存储集合但因为它实现了线程同步（而且实现的机制不好），故各方面的性能都比较差。<br>Vector<br>　　Vector同步了每个方法，你几乎从不要那样做，通常有想要同步的是整个操作序列。同步单个的操作也不安全（如果你迭代一个Vector，你还是要加锁，以避免其它线程在同一时刻改变集合）.而且效率更慢。当然同样有锁的开销即使你不需要，这是个很糟糕的方法在默认情况下同步访问。你可以一直使用Collections.sychronizedList来装饰一个集合。</p>
+<h2 id="Map接口"><a href="#Map接口" class="headerlink" title="Map接口"></a>Map接口</h2><p>Map接口继承关系<br><img src="https://raw.githubusercontent.com/seasonfif/picture/master/other/map-mark.jpg" alt="Map"><br>详细的类图结构<br><img src="https://raw.githubusercontent.com/seasonfif/picture/master/other/java-map.png" alt="Map"></p>
+<h3 id="1、接口定义-1"><a href="#1、接口定义-1" class="headerlink" title="1、接口定义"></a>1、接口定义</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Map</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">size</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">containsKey</span><span class="params">(Object var1)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">containsValue</span><span class="params">(Object var1)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">V <span class="title">get</span><span class="params">(Object var1)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">V <span class="title">put</span><span class="params">(K var1, V var2)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">V <span class="title">remove</span><span class="params">(Object var1)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">putAll</span><span class="params">(Map&lt;? extends K, ? extends V&gt; var1)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">Set&lt;K&gt; <span class="title">keySet</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function">Collection&lt;V&gt; <span class="title">values</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  Set&lt;Map.Entry&lt;K, V&gt;&gt; entrySet();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object var1)</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> V <span class="title">getOrDefault</span><span class="params">(Object var1, V var2)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">forEach</span><span class="params">(BiConsumer&lt;? <span class="keyword">super</span> K, ? <span class="keyword">super</span> V&gt; var1)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> <span class="keyword">void</span> <span class="title">replaceAll</span><span class="params">(BiFunction&lt;? <span class="keyword">super</span> K, ? <span class="keyword">super</span> V, ? extends V&gt; var1)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> V <span class="title">putIfAbsent</span><span class="params">(K var1, V var2)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> <span class="keyword">boolean</span> <span class="title">remove</span><span class="params">(Object var1, Object var2)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> <span class="keyword">boolean</span> <span class="title">replace</span><span class="params">(K var1, V var2, V var3)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> V <span class="title">replace</span><span class="params">(K var1, V var2)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> V <span class="title">computeIfAbsent</span><span class="params">(K var1, Function&lt;? <span class="keyword">super</span> K, ? extends V&gt; var2)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> V <span class="title">computeIfPresent</span><span class="params">(K var1, BiFunction&lt;? <span class="keyword">super</span> K, ? <span class="keyword">super</span> V, ? extends V&gt; var2)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> V <span class="title">compute</span><span class="params">(K var1, BiFunction&lt;? <span class="keyword">super</span> K, ? <span class="keyword">super</span> V, ? extends V&gt; var2)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">default</span> V <span class="title">merge</span><span class="params">(K var1, V var2, BiFunction&lt;? <span class="keyword">super</span> V, ? <span class="keyword">super</span> V, ? extends V&gt; var3)</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Entry</span>&lt;<span class="title">K</span>, <span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">    <span class="function">K <span class="title">getKey</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">V <span class="title">getValue</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function">V <span class="title">setValue</span><span class="params">(V var1)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">equals</span><span class="params">(Object var1)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">default</span> &lt;K extends Comparable&lt;? <span class="keyword">super</span> K&gt;, V&gt; Comparator&lt;Map.Entry&lt;K, V&gt;&gt; comparingByKey() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">default</span> &lt;K, V extends Comparable&lt;? <span class="keyword">super</span> V&gt;&gt; Comparator&lt;Map.Entry&lt;K, V&gt;&gt; comparingByValue() &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">default</span> &lt;K, V&gt; Comparator&lt;Map.Entry&lt;K, V&gt;&gt; comparingByKey(Comparator&lt;? <span class="keyword">super</span> K&gt; var0) &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">default</span> &lt;K, V&gt; Comparator&lt;Map.Entry&lt;K, V&gt;&gt; comparingByValue(Comparator&lt;? <span class="keyword">super</span> V&gt; var0) &#123;&#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2、AbstractMap"><a href="#2、AbstractMap" class="headerlink" title="2、AbstractMap"></a>2、AbstractMap</h3><p>HashMap<br>　　基于哈希表的 Map 接口的实现。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。（除了非同步和允许使用 null 之外，HashMap 类与 Hashtable 大致相同。）此类不保证映射的顺序，特别是它不保证该顺序恒久不变。<br>　　HashMap 的实例有两个参数影响其性能：初始容量 和加载因子。容量 是哈希表中桶的数量，初始容量只是哈希表在创建时的容量。加载因子 是哈希表在其容量自动增加之前可以达到多满的一种尺度。当哈希表中的条目数超出了加载因子与当前容量的乘积时，则要对该哈希表进行 rehash 操作（即重建内部数据结构），从而哈希表将具有大约两倍的桶数。<br>　　通常，默认加载因子 (.75) 在时间和空间成本上寻求一种折衷。加载因子过高虽然减少了空间开销，但同时也增加了查询成本（在大多数 HashMap 类的操作中，包括 get 和 put 操作，都反映了这一点）。在设置初始容量时应该考虑到映射中所需的条目数及其加载因子，以便最大限度地减少 rehash 操作次数。如果初始容量大于最大条目数除以加载因子，则不会发生 rehash 操作。<br>　　该类不是线程安全的。<br>WeakHashMap<br>　　以弱键实现的基于哈希表的 Map。在 WeakHashMap 中，当某个键不再正常使用时，将自动移除其条目。更精确地说，对于一个给定的键，其映射的存在并不阻止垃圾回收器对该键的丢弃，这就使该键成为可终止的，被终止，然后被回收。丢弃某个键时，其条目从映射中有效地移除，因此，该类的行为与其他的 Map 实现有所不同。 </p>
+<h3 id="3、LinkedHashMap"><a href="#3、LinkedHashMap" class="headerlink" title="3、LinkedHashMap"></a>3、LinkedHashMap</h3><p>LinkedHashMap<br>　　该类是 Map 接口的哈希表和链表实现。该类维护着一个运行于所有条目的双重链接列表。此链接列表定义了迭代顺序，该迭代顺序通常就是将键插入到映射中的顺序（插入顺序），亦即它保留插入的顺序，输出的顺序即为输入时的插入顺序。此实现提供所有可选的映射操作，并允许使用 null 值和 null 键。此类不保证映射的顺序，特别是它不保证该顺序恒久不变。<br>　　根据链表中元素的顺序可以分为：按插入顺序的链表，和按访问顺序(调用 get 方法)的链表。<br>　　默认是按插入顺序排序，如果指定按访问顺序排序，那么调用 get 方法后，会将这次访问的元素移至链表尾部，不断访问可以形成按访问顺序排序的链表。  可以重写 removeEldestEntry 方法返回 true 值指定插入元素时移除最老的元素。<br>　　注意，此实现不是同步的。</p>
+<h3 id="4、SortedMap"><a href="#4、SortedMap" class="headerlink" title="4、SortedMap"></a>4、SortedMap</h3><p>TreeMap<br>　　基于红黑树（Red-Black tree）的 NavigableMap 实现。该映射根据其键的自然顺序进行排序，或者根据创建映射时提供的 Comparator 进行排序，具体取决于使用的构造方法。<br>　　在添加、删除和定位映射关系上，TreeMap类要比HashMap类的性能差一些，但是其中的映射关系具有一定的顺序，如果不需要一个有序的集合，则建议使用HashMap类；如果需要进行有序的遍历输出，则建议使用TreeMap类，在这种情况下，可以先使用由HashMap类实现的Map集合，在需要顺序输出时，再利用现有的HashMap类的实例，创建一个具有完全相同映射关系的TreeMap类型的实例。</p>
+<h3 id="5、ConcurrentMap"><a href="#5、ConcurrentMap" class="headerlink" title="5、ConcurrentMap"></a>5、ConcurrentMap</h3><p>　　该类是线程安全的 Map 实现。与 Hashtable 相似，但 Hashtable 的 synchronized 是针对整张Hash表的，即每次锁住整张表让线程独占，ConcurrentHashMap 允许多个修改操作并发进行，其关键在于使用了锁分离技术。它使用了多个锁来控制对 hash 表的不同部分进行的修改。ConcurrentHashMap 内部使用段(Segment)来表示这些不同的部分，每个段其实就是一个小的hash table，它们有自己的锁。只要多个修改操作发生在不同的段上，它们就可以并发进行。<br>　　Hashtable 对 get,put,remove 都使用了同步操作，它的同步级别是正对 Hashtable 来进行同步的，也就是说如果有线程正在遍历集合，其他的线程就暂时不能使用该集合了，这样无疑就很容易对性能和吞吐量造成影响，从而形成单点。而ConcurrentHashMap 则不同，它只对 put,remove 操作使用了同步操作，get 操作并不影响。<br>　　该类不允许将 null 用作键或值。 </p>
+<h3 id="6、Hashtable"><a href="#6、Hashtable" class="headerlink" title="6、Hashtable"></a>6、Hashtable</h3><p>　　Hashtable 的实例有两个参数影响其性能：初始容量 和加载因子。容量 是哈希表中桶 的数量，初始容量就是哈希表创建时的容量。注意，哈希表的状态为 open：在发生“哈希冲突”的情况下，单个桶会存储多个条目，这些条目必须按顺序搜索。加载因子 是对哈希表在其容量自动增加之前可以达到多满的一个尺度。初始容量和加载因子这两个参数只是对该实现的提示。关于何时以及是否调用 rehash 方法的具体细节则依赖于该实现。<br>　　通常，默认加载因子(.75)在时间和空间成本上寻求一种折衷。加载因子过高虽然减少了空间开销，但同时也增加了查找某个条目的时间（在大多数 Hashtable 操作中，包括 get 和 put 操作，都反映了这一点）。<br>　　初始容量主要控制空间消耗与执行 rehash 操作所需要的时间损耗之间的平衡。如果初始容量大于 Hashtable 所包含的最大条目数除以加载因子，则永远 不会发生 rehash 操作。但是，将初始容量设置太高可能会浪费空间。<br>　　Hashtable 是同步的，现在一般情况下，都使用 HashMap ，而不使用陈旧的 Hashtbale，即便需要同步的时候，也是采用加同步的HashMap或者ConcurrentHashMap等实现。</p>
+<p><br></p>
+
+        
+    
+
+    
+</div>
+
+
+                    
+
+                    <!-- Post Comments -->
+                    
+                        
+    <style>
+	.comment-padding{
+		padding:40px;
+	}
+
+	@media screen and (max-width: 480px){
+		.comment-padding{
+			padding:5px;
+		}
+	}
+</style>
+
+<div id="comment" class="vcomment comment-padding"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'true' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "0sCUN38EBFYznhxrMgsQ9DUa-gzGzoHsz",
+        appKey: "q9GMqQkjVN7jWkscuy53XJU5",
+        placeholder: "来吧，互相伤害吧！",
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info
+    });
+</script>
+
+                    
+                </div>
+
+                <!-- Post Prev & Next Nav -->
+                <style>
+
+    .nav_text {
+        /* color: #0097A7; */
+    }
+
+    .nav_text:hover{
+        text-decoration: underline
+    }
+</style>
+<nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <div>
+            <a href="/2015/03/25/java/深入理解HashMap/" id="post_nav-newer" class="prev-content nav_text">
+                <button style="margin-bottom:5px" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                    <i style="padding-top:1.5px;" class="material-icons">arrow_back</i>
+                </button>
+                <span style="margin-left:7px" class="nav_text">上一篇</span>
+                <div>
+                    <h5 style="margin-top:12px" class="nav_text">深入理解HashMap</h5> 
+                </div>
+            </a>  
+        </div>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <div style="text-align:right">
+            <a href="/2015/03/07/other/使用HEXO+Github搭建自己的博客/" id="post_nav-older" class="next-content nav_text">
+                <span style="margin-right:7px" class="nav_text">下一篇</span>
+                <button style="margin-bottom:5px" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                    <i style="padding-top:1.5px" class="material-icons">arrow_forward</i>
+                </button>
+                <div>
+                    <h5 style="margin-top:12px" class="nav_text">使用HEXO+Github搭建自己的博客</h5>
+                </div>
+            </a>
+        </div>
+    
+</nav>
+
+            </div>
+
+            <!-- Post TOC -->
+            
+                <aside> 
+                    <nav class="post-toc-wrap top" id="post-toc">
+                        <h4>目录</h4>
+                        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#集合框架概览"><span class="post-toc-number">1.</span> <span class="post-toc-text">集合框架概览</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Collection接口"><span class="post-toc-number">2.</span> <span class="post-toc-text">Collection接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、接口定义"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">1、接口定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、Set实现类"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">2、Set实现类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、Queue实现类"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">3、Queue实现类</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、List实现类"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">4、List实现类</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Map接口"><span class="post-toc-number">3.</span> <span class="post-toc-text">Map接口</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1、接口定义-1"><span class="post-toc-number">3.1.</span> <span class="post-toc-text">1、接口定义</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2、AbstractMap"><span class="post-toc-number">3.2.</span> <span class="post-toc-text">2、AbstractMap</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3、LinkedHashMap"><span class="post-toc-number">3.3.</span> <span class="post-toc-text">3、LinkedHashMap</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4、SortedMap"><span class="post-toc-number">3.4.</span> <span class="post-toc-text">4、SortedMap</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5、ConcurrentMap"><span class="post-toc-number">3.5.</span> <span class="post-toc-text">5、ConcurrentMap</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6、Hashtable"><span class="post-toc-number">3.6.</span> <span class="post-toc-text">6、Hashtable</span></a></li></ol></li></ol>
+                    </nav>                  
+                    </aside>
+            
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image" style="margin-top: 50px;">
+        <img src="/img/seasonfif.JPG" alt="第五季's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/categories" title="分类">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                标签
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+        <li>
+            <a href="/archive" title="归档">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                归档
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/gallery" title="画廊">
+                
+                    <i class="material-icons sidebar-material-icons">camera</i>
+                
+                画廊
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+    <a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+        sidebar.help
+        <span class="mdl-button__ripple-container">
+          <span class="mdl-ripple"></span>
+        </span>
+      </div>
+    </a>
+
+-->
+
+<!-- Feedback -->
+<!--
+
+    <a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+        sidebar.feedback
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+    </a>
+
+-->
+
+<!-- About Theme -->
+<!--
+
+    <a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+             sidebar.about_theme
+            <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+    </a>
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <style>
+    .toTop{
+        width: 50px;
+        height: 50px;
+        background:#ff4081 !important;
+    }
+
+    .toTop i{
+        margin: 13px;
+    }
+</style>
+
+<div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<style>
+    .mdl-mini-footer{
+        background: #0097A7 !important;
+        color: #BDBDBD !important;
+    }
+
+    .mdl-mini-footer--right-section a{
+        color: #BDBDBD !important;
+    }
+
+    .footer-develop-a:hover {
+        color: #FF80AB !important;
+        text-decoration: underline !important;
+    }
+
+</style>
+
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="https://weibo.com/seasonfif" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/seasonfif" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;2015&nbsp;-<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>seasonfif | 第五季
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?agMErfJdjr2Eo0sH0O7qfA==", true)</script>
+
+
+<script>lsloader.load("jm_js","/js/jquery.leanModal.min.js?AQf83Rf/eF1HhfnKwwRVhQ==", true)</script>
+<script>lsloader.load("th_js","/js/top-header.js?7u6LuV7zuY6czvmlnc9JpQ==", true)</script>
+
+    <script>lsloader.load("blog_js","/js/blog.js?gyllcJH6iU25FXAVNTR3YQ==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+    
+        <script>lsloader.load("sm_js","/js/smoothscroll.js?lOy/ACj5suSNi7ZVFVbpFQ==", true)</script>
+    
+
+
+
+    <!-- Leancloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+    <script>
+        AV.initialize('0sCUN38EBFYznhxrMgsQ9DUa-gzGzoHsz', 'q9GMqQkjVN7jWkscuy53XJU5');
+    </script>
+    <script type="text/ls-javascript" id="leancloud-views-script">
+    function showTime(Counter) {
+        var query = new AV.Query(Counter);
+        $('.leancloud-views_num').each(function() {
+            var url = $(this).attr('id').trim();
+            query.equalTo('url', url);
+            query.find({
+                success: function(results) {
+                    if (results.length === 0) {
+                        var content = '0 ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                        return;
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    }
+                },
+                error: function(object, error) {
+                    console.log('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        });
+    }
+
+    function addCount(Counter) {
+      var Counter = AV.Object.extend('Counter');
+      url = $('.leancloud-views_num').attr('id').trim();
+      title = $('.leancloud-views_num').attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+      query.equalTo('url', url);
+      query.find({
+          success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment('time');
+                counter.save(null, {
+                    success: function(counter) {
+                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+              var newcounter = new Counter();
+              newcounter.set('title', title);
+              newcounter.set('url', url);
+              newcounter.set('time', 1);
+              newcounter.save(null, {
+                  success: function(newcounter) {
+                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
+                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+                      $(document.getElementById(url)).text(content);
+                  },
+                  error: function(newcounter, error) {
+                      console.log('Failed to create');
+                  }
+              });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + ' ' + error.message);
+        }
+      });
+    }
+    $(function() {
+        var Counter = AV.Object.extend('Counter');
+        if ($('.leancloud-views_num').length === 1) {
+            addCount(Counter);
+        } else if ($('.post-title-link').length > 1) {
+            showTime(Counter);
+        }
+    });
+</script>
+
+
+
+
+
+
+   
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

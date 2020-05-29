@@ -36,12 +36,6 @@ $(document).ready(function() {
         this.placeholder = "";
     });
 
-    // Auto delete input content & placeholder
-    $(".search-input").blur(function() {
-        this.value = "";
-        this.placeholder="";
-    });
-
     // Auto hidden share/tags popup block
     $('#article-functions-share-button').click(function() {
         $('.is-visible').removeClass('is-visible');
@@ -90,7 +84,7 @@ $(document).ready(function() {
 
     // Click anywhere to remove local search result
     $(document).click(function() {
-        $("#local-search-result ul").css("display", "none");
+        // $("#local-search-result ul").css("display", "none");
     });
 });
 

@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.2 -->
+    <script>
+        window.materialVersion = "1.5.2"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+    <link rel="dns-prefetch" href="https://cdn1.lncld.net"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            FlutterEngine初始化流程剖析 | 
+        
+        seasonfif | 第五季
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/seasonfif.JPG">
+    <link rel="icon" href="/img/seasonfif.JPG">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content=""/>
+    <meta name="keywords" content=",Flutter"/>
+    <meta name="theme-color" content="#0097A7"/>
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?OIqfivxywtwaQrjrKubNQg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?dHwxgeJO7kQ9iS02XSHaDA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="seasonfif | 第五季">
+    <meta name="msapplication-starturl" content="https://seasonfif.github.io/2020/05/27/flutter/FlutterEngine初始化流程剖析/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="seasonfif | 第五季">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/seasonfif.JPG">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://seasonfif.github.io/2020/05/27/flutter/FlutterEngine初始化流程剖析/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="FlutterEngine初始化流程剖析 | seasonfif | 第五季">
+    <meta property="og:image" content="/img/seasonfif.JPG">
+    <meta property="og:description" content="">
+    <meta property="og:article:tag" content="Flutter"> 
+
+    
+        <meta property="article:published_time" content="Wed May 27 2020 17:52:33 GMT+0800">
+        <meta property="article:modified_time" content="Fri May 29 2020 14:09:14 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://seasonfif.github.io/2020/05/27/flutter/FlutterEngine初始化流程剖析/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://seasonfif.github.io/2020/05/27/flutter/FlutterEngine初始化流程剖析/index.html",
+    "headline": "FlutterEngine初始化流程剖析",
+    "datePublished": "Wed May 27 2020 17:52:33 GMT+0800",
+    "dateModified": "Fri May 29 2020 14:09:14 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "第五季",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/seasonfif.JPG"
+        },
+        "description": "陌上人如玉 ,,第五季的博客 "
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "seasonfif | 第五季",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/seasonfif.JPG"
+        }
+    },
+    "keywords": ",Flutter",
+    "description": "",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-111267309-1', 'auto');ga('send', 'pageview');
+</script>
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                <style>
+
+    .header_content{
+        width: 100%;
+        height: 220px;
+        background: #0097A7;
+        box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
+    }
+
+    .top-header {
+        /* position: fixed; */
+        left: 0;
+        top: 0;
+        width: 100%;
+        color: #0097A7;
+        height: 56px;
+        background: #0097A7;
+        -webkit-transition: padding-left .6s ease-in-out, background-color .3s cubic-bezier(.4,0,.2,1), box-shadow .15s linear;
+        transition: padding-left .6s ease-in-out, background-color .3s cubic-bezier(.4,0,.2,1), box-shadow .15s linear;
+        /* transition: all 1500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; */
+        z-index: 1;
+    }
+    .top-header.fixed {
+        position: fixed;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    }
+    .top-header.fixed .header-title {
+        visibility: visible;
+    }
+
+    /* flex布局  */
+    .flex-row,
+    .flex-column,
+    .flex-row-vertical {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display:         flex;
+        -webkit-align-items: center; 
+        align-items: center;
+    }
+
+    .MD-burger-layer {
+        background: white !important;
+    }
+
+    .MD-burger-icon- {
+        margin: 0 0 0 1pc;
+        cursor: pointer;
+        border: none;
+        background: 0 0;
+        outline: 0;
+        top: 2pc;
+        z-index: 0;
+        height: 2pc;
+        width: 2pc;
+    }
+
+    .header-icon {
+        width: 56px;
+        height: 56px;
+        line-height: 56px;
+        text-align: center;
+        color: white;
+    }
+
+    .flex-col {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+    }
+    .ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+
+<div class="header_content" id="header">
+    <header class="top-header" id="header_top">
+        <div class="flex-row">
+
+            <!-- Hamburger Button -->
+            <button class="MD-burger-icon- sidebar-toggle">
+                <span class="MD-burger-layer"></span>
+            </button>
+
+            <div class="flex-col header-title ellipsis"></div>
+
+            <a style="margin-right: 5px;" class="menu-search modal-trigger" href="#search">
+                <i style="margin: 13px;" class="material-icons mdl-color-text--white" role="presentation">search</i>
+            </a>
+        </div>
+    </header>
+
+    <style>
+    #lean_overlay {  
+        position: fixed;  
+        z-index:1;
+        top: 0px;  
+        left: 0px;  
+        height:100%;  
+        width:100%;  
+        background: #000;  
+        display: none;  
+    }
+
+    .modal {
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      background-color: #fafafa;
+      padding: 0;
+      max-height: 70%;
+      width: 55%;
+      margin: 0 auto;
+      overflow-y: auto;
+      border-radius: 2px;
+      will-change: top, opacity;
+      box-shadow: 0 16px 28px 0 rgba(0,0,0,0.22),0 25px 55px 0 rgba(0,0,0,0.21);
+    }
+
+    .search-modal {
+      padding: 10px 0 30px 0;
+      max-height: 80%;
+    }
+
+    .modal-bg{
+      background-color: rgb(204, 232, 207);
+      z-index: 9999;
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .row {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        padding: 0px 15px;
+    }
+
+    .row .col.s12 {
+        width: 100%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+    .row .col {
+        float: left;
+        box-sizing: border-box;
+        padding: 0 0.75rem;
+    }
+    .input-field {
+        position: relative;
+        margin-top: 1rem;
+    }
+
+
+    input[type=text]
+    :focus {
+      border-bottom-color: #757575;
+      box-shadow: 0 1px 0 0 #757575;
+    }
+    input[type=text]
+    :focus+label {
+      color: #212121;
+    }
+    .search-modal .search-result {
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
+    .mdl-textfield__input {
+        color: #0097A7;
+    }
+</style>
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+            <span id="search-input-title" style="display:block; margin-bottom:7px;"><label for="search-input">搜索</label></span>
+            <input id="search-input" class="mdl-textfield__input search-input" type="search" placeholder="">   
+        </div>
+    </div>
+    <div id="local-search-result" class="search-result col s12">
+    </div>
+</div>
+</div>
+
+
+
+                <style>
+                    .material-layout__content{
+                        margin-top: -130px !important;
+                        padding-top: 0px !important;
+                    }
+                </style>
+                
+                
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    <!-- Layouts -->
+
+    <style>
+        .mdl-card:hover {
+            box-shadow:0px 20px 20px rgba(0,0,0,.156863),0 3px 10px rgba(0,0,0,.227451);
+        }
+
+        .material-post_container {
+            display: flex;
+            flex-flow: row;
+            flex-wrap: nowrap;
+        }
+
+        .material-post{
+            max-width: 768px !important;
+            width: 100%;
+            margin: 0 0 0 0 !important;
+        }
+
+        .center-container{
+            display: flex;
+            flex-flow: row;
+            flex-wrap: nowrap;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 768px;
+            
+                max-width: 900px;
+            
+        }
+        
+        /* 目录样式 */
+        .post-toc-wrap {
+        position: fixed;
+        margin-left: 50px;
+        overflow-x: hidden;
+        }
+        .post-toc-wrap.top{
+            margin-top: 150px;
+        }
+        .post-toc-wrap.fixed {
+        top: 0px;
+        bottom: 140px;
+        overflow-y: auto;
+        }
+        .post-toc-wrap ol,
+        .post-toc-wrap ul {
+        list-style: none;
+        margin: 0;
+        }
+        .post-toc-wrap h4 {
+        padding: 0 0 0px 20px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #727272;
+        }
+
+        .post-toc-child {
+        padding-left: 10px;
+        }
+        .post-toc {
+            width: auto;
+            word-wrap: normal;
+            white-space: nowrap;
+            padding: 0;
+            list-style: none;
+            padding: 0 7px;
+        }
+
+        .post-toc a:hover {
+            color: #ff4081;
+            text-decoration: underline;
+        }
+        .post-toc >.post-toc-item {
+        position: relative;
+        }
+        .post-toc-item {
+        font-weight: 400;
+        color: #ff4081;
+        }
+        .post-toc-item.active >.post-toc-link {
+        font-weight: 600;
+        color: #ff4081;
+        }
+        .post-toc-item.active >.post-toc-link:before {
+        background: rgba(0,0,0,0.06);
+        }
+        .post-toc-item.active >.post-toc-link:after {
+        border-left: 3px solid #ff4081;
+        }
+        .post-toc-link {
+        position: relative;
+        z-index: 2;
+        display: block;
+        padding: 3px 20px;
+        line-height: 1.5rem;
+        color: inherit;
+        word-break: break-all;
+        }
+        .post-toc-link:hover {
+        opacity: .8;
+        }
+        .post-toc-link:before,
+        .post-toc-link:after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        }
+    </style>
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="center-container">
+            <div class="material-post mdl-grid">
+                <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                    <!-- Post Header(Thumbnail & Title) -->
+                    
+    <!-- Paradox Post Header -->
+    
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(https://raw.githubusercontent.com/seasonfif/picture/master/flutter/flutter-bg.png)">
+    
+            <p class="article-headline-p">
+                FlutterEngine初始化流程剖析
+            </p>
+        </div>
+
+
+
+
+
+                    
+                        <!-- Paradox Post Info -->
+                        <style>
+    .worldcount_content{
+        margin-left:25px;
+    }
+
+    @media screen and (max-width: 480px) {
+      .worldcount_content {
+        margin-left:5px
+      }
+  }
+</style>
+
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/seasonfif.JPG" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>第五季</strong>
+        <span>2020.5.27</span>
+    </div>
+
+    <div class="worldcount_content">
+        <span class="post-count">字数：2,268字</span>
+        <span class="post-count">时长：10分钟</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Tags (bookmark) -->
+    
+    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+        <i class="material-icons" role="presentation">bookmark</i>
+        <span class="visuallyhidden">bookmark</span>
+    </button>
+    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
+        <li class="mdl-menu__item">
+        <a class="post_tag-link" href="/tags/flutter/">Flutter</a>
+    </ul>
+    
+
+    <!-- Share -->
+    
+        <button id="article-functions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="weixin-qrcode-button">
+    <li class="mdl-menu__item">微信扫一扫分享</li>
+    
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC3ElEQVR42u3aQXICMQwEQP7/6eQBCctIMtRi956oItjbPkSlkR8/Rz4PbGxsbGxsbGxs7FuyH/Hzz0J/vr3+7fVfJitM3hkbGxt7b/aLf/3BxterPYPley14Z2xsbOwD2Dnm+iCqB3T92+Rz9M7Y2NjY2AHm+hWTBiYpVNjY2NjYawtYFZnj5+EUNjY29mnsJKDJg/vqatVI66NZGjY2Nvbt2fnQ9D6fPzrfxsbGxr4xe/5UjyYfDy9+T2xsbOxN2UlgVB3QThqY5FJm77CwsbGxd2Un2yev3ov+86OsggutCDY2NvYW7DxI6jHylqY3oogODhsbG3tTdhKs5/hek7Pq+k65A8PGxsbegt3bJgmGJrFR79tR3cbGxsb+WnYS4vSGAcm31YJUPVxsbGzsc9i9YGgeKs0PK98XGxsbe1d2L2DqXfdJDnEyAH6xPjY2Nvam7LUFrHopJx8qVyOtj9ZtbGxs7BuwVw1xJwOGSauzeDyAjY2N/VXsJF6vBvrVkW0eMEWFChsbG/sw9rzM5AVvEgnljVAhVMLGxsbegt1rSx7FJ/9VNXhaPBXBxsbG/kL2pIRUjywvYL325sXK2NjY2AewJ4Pe3lWeQrhfvEiEjY2NfQ67Gr5Xy1heuiahVbQCNjY29qbsajHoBUl5GZuEUM26jY2Njf3l7ASZl5wqrFmKekNlbGxs7E3ZSTCUFLlqOZxc8eld/cHGxsbelZ0PXCcj2PxX1bJXOBpsbGzsTdnVpa9JeYSUF55eY4ONjY19DrsX6PSOZj4eGI2WsbGxsTdl99qAZJtq6NMre9jY2NjYvfFtdYXq+HbSojxdHxsbG/sAdi/6qV6v7L36pMRiY2NjYydHkF/WyS/fzPfFxsbGxk62rDYzvRFyNU56Y93GxsbGvjG7F+6vuqZ5vVp+lG/J0rCxsbFvz84jmyo4R1aLWd72YGNjY+/NPufBxsbGxsbGxsbGvs3zC1cRSUvvxbAqAAAAAElFTkSuQmCC">
+    
+</ul>
+
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2020/05/27/flutter/FlutterEngine初始化流程剖析/" class="leancloud-views_num" data-flag-title="FlutterEngine初始化流程剖析">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weixin -->
+    
+        <a id="weixin-qrcode-button" class="post_share-link" href="javascript:void(0);">
+            <li class="mdl-menu__item" role="presentation">
+                分享到微信
+            </li>
+        </a>
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=FlutterEngine初始化流程剖析&url=https://seasonfif.github.io/2020/05/27/flutter/FlutterEngine初始化流程剖析/index.html&pic=https://seasonfif.github.io/img/seasonfif.JPG&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=seasonfif | 第五季&title=FlutterEngine初始化流程剖析&summary=&pics=https://seasonfif.github.io/img/seasonfif.JPG&url=https://seasonfif.github.io/2020/05/27/flutter/FlutterEngine初始化流程剖析/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+    
+</div>
+
+                    
+                    
+                    <!-- Post Content -->
+                    <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h2 id="Flutter框架介绍"><a href="#Flutter框架介绍" class="headerlink" title="Flutter框架介绍"></a>Flutter框架介绍</h2><p>Flutter框架分三层即Framework，Engine， Embedder</p>
+<p><img src="https://raw.githubusercontent.com/seasonfif/picture/master/flutter/FlutterArt.jpg" alt="FlutterArt"></p>
+<p>Framework使用dart语言实现，包括UI，文本，图片，按钮等Widgets，渲染，动画，手势等。此部分的核心代码是flutter仓库下的flutter package，以及sky_engine仓库下的 io, async, ui(dart:ui库提供了Flutter框架和引擎之间的接口)等package。</p>
+<p>Engine使用C++实现，是Flutter的核心引擎，主要包括Skia图形引擎、Dart运行时环境Dart VM、Text文本渲染引擎等。</p>
+<p>Embedder是一个嵌入层，通过该层把Flutter嵌入到各个平台上去，Embedder的主要工作包括渲染Surface设置, 线程设置，以及插件等。平台(如iOS)只是提供一个画布，剩余的所有渲染相关的逻辑都在Flutter内部，这就使得它具有了很好的跨端一致性。</p>
+<h2 id="FlutterEngine初始化流程剖析"><a href="#FlutterEngine初始化流程剖析" class="headerlink" title="FlutterEngine初始化流程剖析"></a>FlutterEngine初始化流程剖析</h2><p>既然FlutterEngine是整个flutter框架的核心，想要深入理解flutter跨平台UI渲染能力就必须对引擎逻辑有所了解以及掌握重要细节流程。下面我们就以android平台为例开始深入剖析FlutterEngine的启动流程。整个Flutter Engine源码包含了非常多的东西，DartVM、Render、Channel、Event等等，所以我们只能从相关的点去看，那么从FlutterEngine初始化来说，我们主要关注和Java层有关联的一些操作。相关的代码主要在flutter/shell/platform/android/io/flutter目录下。</p>
+<h3 id="FlutterEngine初始化"><a href="#FlutterEngine初始化" class="headerlink" title="FlutterEngine初始化"></a>FlutterEngine初始化</h3><p>FlutterApplication启动时使用了Java层的FlutterMain来进行初始化。代码位置在<em>flutter/shell/platform/android/io/flutter/app/FlutterApplication.java</em></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">super</span>.onCreate();</span><br><span class="line">    FlutterMain.startInitialization(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>FlutterMain的startInitialization的最终调用方法为</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">startInitialization</span><span class="params">(@NonNull Context applicationContext, @NonNull FlutterMain.Settings settings)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!isRunningInRobolectricTest) &#123;</span><br><span class="line">        <span class="keyword">if</span> (Looper.myLooper() != Looper.getMainLooper()) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> IllegalStateException(<span class="string">"startInitialization must be called on the main thread"</span>);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (sSettings == <span class="keyword">null</span>) &#123;</span><br><span class="line">            sSettings = settings;</span><br><span class="line">            <span class="keyword">long</span> initStartTimestampMillis = SystemClock.uptimeMillis();</span><br><span class="line">            initConfig(applicationContext);</span><br><span class="line">            initResources(applicationContext);</span><br><span class="line">            System.loadLibrary(<span class="string">"flutter"</span>);</span><br><span class="line">            VsyncWaiter.getInstance((WindowManager)applicationContext.getSystemService(<span class="string">"window"</span>)).init();</span><br><span class="line">            <span class="keyword">long</span> initTimeMillis = SystemClock.uptimeMillis() - initStartTimestampMillis;</span><br><span class="line">            FlutterJNI.nativeRecordStartTimestamp(initTimeMillis);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从以上代码我们可以看出flutter框架只会在主线程初始化，这也很好理解因为flutter本质是一个跨平台UI框架。初始化的过程也很简单一是配置一些启动参数，二是加载相关资源文件，还有就是注册GPU垂直同步信号。</p>
+<h3 id="flutter配置项与资源加载"><a href="#flutter配置项与资源加载" class="headerlink" title="flutter配置项与资源加载"></a>flutter配置项与资源加载</h3><h4 id="initConfig"><a href="#initConfig" class="headerlink" title="initConfig"></a>initConfig</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">initConfig</span><span class="params">(@NonNull Context applicationContext)</span> </span>&#123;</span><br><span class="line">        Bundle metadata = getApplicationInfo(applicationContext).metaData;</span><br><span class="line">        <span class="keyword">if</span> (metadata != <span class="keyword">null</span>) &#123;</span><br><span class="line">            sAotSharedLibraryName = metadata.getString(PUBLIC_AOT_SHARED_LIBRARY_NAME, <span class="string">"libapp.so"</span>);</span><br><span class="line">            sFlutterAssetsDir = metadata.getString(PUBLIC_FLUTTER_ASSETS_DIR_KEY, <span class="string">"flutter_assets"</span>);</span><br><span class="line">            sVmSnapshotData = metadata.getString(PUBLIC_VM_SNAPSHOT_DATA_KEY, <span class="string">"vm_snapshot_data"</span>);</span><br><span class="line">            sIsolateSnapshotData = metadata.getString(PUBLIC_ISOLATE_SNAPSHOT_DATA_KEY, <span class="string">"isolate_snapshot_data"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>从AndroidManfest.xml配置的applicaion节点获取meta-data数据，初始化以下默认值。这些值都是FlutterEngine加载过程中使用到的name，例如，抽取apk中asset资源时，flutter_assets打包目录，打包产物data名称。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> String sAotSharedLibraryName = <span class="string">"libapp.so"</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> String sVmSnapshotData = <span class="string">"vm_snapshot_data"</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> String sIsolateSnapshotData = <span class="string">"isolate_snapshot_data"</span>;</span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> String sFlutterAssetsDir = <span class="string">"flutter_assets"</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="initResources"><a href="#initResources" class="headerlink" title="initResources"></a>initResources</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">initResources</span><span class="params">(@NonNull Context applicationContext)</span> </span>&#123;</span><br><span class="line">        (<span class="keyword">new</span> ResourceCleaner(applicationContext)).start();</span><br><span class="line">        String dataDirPath = PathUtils.getDataDirectory(applicationContext);</span><br><span class="line">        String packageName = applicationContext.getPackageName();</span><br><span class="line">        PackageManager packageManager = applicationContext.getPackageManager();</span><br><span class="line">        AssetManager assetManager = applicationContext.getResources().getAssets();</span><br><span class="line">        sResourceExtractor = <span class="keyword">new</span> ResourceExtractor(dataDirPath, packageName, packageManager, assetManager);</span><br><span class="line">        sResourceExtractor.addResource(fromFlutterAssets(sVmSnapshotData)).addResource(fromFlutterAssets(sIsolateSnapshotData)).addResource(fromFlutterAssets(<span class="string">"kernel_blob.bin"</span>));</span><br><span class="line">        sResourceExtractor.start();</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>在Flutter打包apk的asset目录下，包括fluttter_asset目录/资源项，将资源从apk中抽取，保存在<em>Context.getDir(“flutter”, 0)</em>目录下。</p>
+<h3 id="flutter-so加载"><a href="#flutter-so加载" class="headerlink" title="flutter.so加载"></a>flutter.so加载</h3><p>在初始化Flutter App资源之后加载了flutter.so，这个就是Flutter Engine源码编译后的产物。 在我们编译Flutter App时，它存在Flutter SDK的flutter.jar中，当生产APK之后，它存在于APK的lib目录下。而当运行时，它被Android虚拟机加载到虚拟内存中。我们知道系统执行完<em>System.loadLibrary</em>后会在C++层执行一个回调函数就是<em>JNI_OnLoad</em>，所以在flutter引擎源码中找到相关函数，代码位于<em>flutter/shell/platform/android/library_loader.cc</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// This is called by the VM when the shared library is first loaded.*</span></span><br><span class="line"><span class="function">JNIEXPORT jint <span class="title">JNI_OnLoad</span><span class="params">(JavaVM* vm, <span class="keyword">void</span>* reserved)</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">  *<span class="comment">// Initialize the Java VM.*</span></span><br><span class="line">  fml::jni::InitJavaVM(vm);</span><br><span class="line">  JNIEnv* env = fml::jni::AttachCurrentThread();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">bool</span> result = <span class="literal">false</span>;</span><br><span class="line">  *<span class="comment">// Register FlutterMain.*</span></span><br><span class="line">  result = flutter::FlutterMain::Register(env);</span><br><span class="line">  FML_CHECK(result);</span><br><span class="line"></span><br><span class="line">  *<span class="comment">// Register PlatformView*</span></span><br><span class="line">  result = flutter::PlatformViewAndroid::Register(env);</span><br><span class="line">  FML_CHECK(result);</span><br><span class="line"></span><br><span class="line">  *<span class="comment">// Register VSyncWaiter.*</span></span><br><span class="line">  result = flutter::VsyncWaiterAndroid::Register(env);</span><br><span class="line">  FML_CHECK(result);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> JNI_VERSION_1_4;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一开始进行了Java VM的初始化，其实保存一下当前的Java VM对象到一个全局的变量中， JavaVM的初始化在zygote进程中已经进行了，每个Android进程都是fork出来的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> JavaVM* g_jvm = <span class="literal">nullptr</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitJavaVM</span><span class="params">(JavaVM* vm)</span> </span>&#123;</span><br><span class="line">  FML_DCHECK(g_jvm == <span class="literal">nullptr</span>);</span><br><span class="line">  g_jvm = vm;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一个进程中只有一个JavaVM对象，如果要在线程中访问JavaVM，就需要把当前的thread和JavaVM关联起来。所以调用AttachCurrentThread 我们可以得到一个JNIEnv对象， 每个线程都有一个。JNIEnv定义了很多和JNI调用相关的方法。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">JNIEnv* <span class="title">AttachCurrentThread</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  FML_DCHECK(g_jvm != <span class="literal">nullptr</span>)</span><br><span class="line">      &lt;&lt; <span class="string">"Trying to attach to current thread without calling InitJavaVM first."</span>;</span><br><span class="line">  JNIEnv* env = <span class="literal">nullptr</span>;</span><br><span class="line">  jint ret = g_jvm-&gt;AttachCurrentThread(&amp;env, <span class="literal">nullptr</span>);</span><br><span class="line">  FML_DCHECK(JNI_OK == ret);</span><br><span class="line">  <span class="keyword">return</span> env;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>后面调用了三个Register方法，作用是注册jni方法，JNI_OnLoad中完成的是jni方法的动态注册，如果没有进行动态注册，JavaVM会默认按照java方法的package name + method name + params 来映射c++方法，这也是一种注册方式-静态注册。由于三个注册方法类似这里重点介绍一下 FlutterMain::Register方法，代码位于<em>flutter/shell/platform/android/flutter_main.cc</em></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> FlutterMain::Register(JNIEnv* env) &#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">const</span> JNINativeMethod methods[] = &#123;</span><br><span class="line">      &#123;</span><br><span class="line">          .name = <span class="string">"nativeInit"</span>,</span><br><span class="line">          .signature = <span class="string">"(Landroid/content/Context;[Ljava/lang/String;Ljava/"</span></span><br><span class="line">                       <span class="string">"lang/String;Ljava/lang/String;Ljava/lang/String;)V"</span>,</span><br><span class="line">          .fnPtr = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">void</span>*&gt;(&amp;Init),</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">          .name = <span class="string">"nativeRecordStartTimestamp"</span>,</span><br><span class="line">          .signature = <span class="string">"(J)V"</span>,</span><br><span class="line">          .fnPtr = <span class="keyword">reinterpret_cast</span>&lt;<span class="keyword">void</span>*&gt;(&amp;RecordStartTimestamp),</span><br><span class="line">      &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  jclass clazz = env-&gt;FindClass(<span class="string">"io/flutter/embedding/engine/FlutterJNI"</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (clazz == <span class="literal">nullptr</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> env-&gt;RegisterNatives(clazz, methods, fml::size(methods)) == <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个方法就是将C++方法Init和RecordStartTimestamp方法分别与ava层FlutterJNI中的nativeInit和nativeRecordStartTimestamp方法绑定，这样就能通过jni实现java代码调用C++代码。另外两个Register方法的作用是一样的，也是注册对应的native方法，具体代码在：<br><em>flutter_engine/shell/platform/android/platform_view_android.h</em><br><em>flutter_engine/shell/platform/android/vsync_waiter_android.h</em></p>
+<h3 id="C-层的初始化"><a href="#C-层的初始化" class="headerlink" title="C++层的初始化"></a>C++层的初始化</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> FlutterMain::Init(JNIEnv* env,</span><br><span class="line">                       jclass clazz,</span><br><span class="line">                       jobject context,</span><br><span class="line">                       jobjectArray jargs,</span><br><span class="line">                       jstring kernelPath,</span><br><span class="line">                       jstring appStoragePath,</span><br><span class="line">                       jstring engineCachesPath) &#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="built_in">std</span>::<span class="built_in">string</span>&gt; args;</span><br><span class="line">  args.push_back(<span class="string">"flutter"</span>);</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">auto</span>&amp; arg : fml::jni::StringArrayToVector(env, jargs)) &#123;</span><br><span class="line">    args.push_back(<span class="built_in">std</span>::move(arg));</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">auto</span> command_line = fml::CommandLineFromIterators(args.begin(), args.end());</span><br><span class="line"></span><br><span class="line">  <span class="keyword">auto</span> settings = SettingsFromCommandLine(command_line);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Restore the callback cache.</span></span><br><span class="line">  <span class="comment">// TODO(chinmaygarde): Route all cache file access through FML and remove this</span></span><br><span class="line">  <span class="comment">// setter.</span></span><br><span class="line">  flutter::DartCallbackCache::SetCachePath(</span><br><span class="line">      fml::jni::JavaStringToString(env, appStoragePath));</span><br><span class="line"></span><br><span class="line">  fml::paths::InitializeAndroidCachesPath(</span><br><span class="line">      fml::jni::JavaStringToString(env, engineCachesPath));</span><br><span class="line"></span><br><span class="line">  flutter::DartCallbackCache::LoadCacheFromDisk();</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (!flutter::DartVM::IsRunningPrecompiledCode() &amp;&amp; kernelPath) &#123;</span><br><span class="line">    <span class="comment">// Check to see if the appropriate kernel files are present and configure</span></span><br><span class="line">    <span class="comment">// settings accordingly.</span></span><br><span class="line">    <span class="keyword">auto</span> application_kernel_path =</span><br><span class="line">        fml::jni::JavaStringToString(env, kernelPath);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (fml::IsFile(application_kernel_path)) &#123;</span><br><span class="line">      settings.application_kernel_asset = application_kernel_path;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  settings.task_observer_add = [](<span class="keyword">intptr_t</span> key, fml::closure callback) &#123;</span><br><span class="line">    fml::MessageLoop::GetCurrent().AddTaskObserver(key, <span class="built_in">std</span>::move(callback));</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  settings.task_observer_remove = [](<span class="keyword">intptr_t</span> key) &#123;</span><br><span class="line">    fml::MessageLoop::GetCurrent().RemoveTaskObserver(key);</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> FLUTTER_RUNTIME_MODE == FLUTTER_RUNTIME_MODE_DEBUG</span></span><br><span class="line">  <span class="comment">// There are no ownership concerns here as all mappings are owned by the</span></span><br><span class="line">  <span class="comment">// embedder and not the engine.</span></span><br><span class="line">  <span class="keyword">auto</span> make_mapping_callback = [](<span class="keyword">const</span> <span class="keyword">uint8_t</span>* mapping, <span class="keyword">size_t</span> size) &#123;</span><br><span class="line">    <span class="keyword">return</span> [mapping, size]() &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">std</span>::make_unique&lt;fml::NonOwnedMapping&gt;(mapping, size);</span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  settings.dart_library_sources_kernel =</span><br><span class="line">      make_mapping_callback(kPlatformStrongDill, kPlatformStrongDillSize);</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span>  <span class="comment">// FLUTTER_RUNTIME_MODE == FLUTTER_RUNTIME_MODE_DEBUG</span></span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Not thread safe. Will be removed when FlutterMain is refactored to no</span></span><br><span class="line">  <span class="comment">// longer be a singleton.</span></span><br><span class="line">  g_flutter_main.reset(<span class="keyword">new</span> FlutterMain(<span class="built_in">std</span>::move(settings)));</span><br><span class="line"></span><br><span class="line">  g_flutter_main-&gt;SetupObservatoryUriCallback(env);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上述代码只是将java层传过来的初始化参数校验拼装成flutter::Settings对象，然后在创建FlutterMain时传入。查看FlutterMain的构造函数可以看到并没有什么特殊操作，只是将setting对象赋值给常量成员<code>_settings</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">FlutterMain::FlutterMain(flutter::Settings settings)</span><br><span class="line">    : settings_(<span class="built_in">std</span>::move(settings)), observatory_uri_callback_() &#123;&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="注册垂直同步信号"><a href="#注册垂直同步信号" class="headerlink" title="注册垂直同步信号"></a>注册垂直同步信号</h3><p><code>startInitialization</code>方法中初始化了GPU垂直同步信号，用来将GPU发出的渲染信号通知给引擎和Dart层。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">VsyncWaiter.getInstance((WindowManager)applicationContext.getSystemService(<span class="string">"window"</span>)).init();</span><br></pre></td></tr></table></figure>
+<p>在android平台上<em>Choreographer</em>类管理GPU帧信号与View绘制相关工作，它有个<em>doFrame</em>回调通知业务层某一帧开始绘制，其实<em>VsyncWaiter</em>的<em>init</em>方法就是向<em>Choreographer</em>注册了一个<em>doFrame</em>回调。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> AsyncWaitForVsyncDelegate asyncWaitForVsyncDelegate = <span class="keyword">new</span> AsyncWaitForVsyncDelegate() &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">asyncWaitForVsync</span><span class="params">(<span class="keyword">final</span> <span class="keyword">long</span> cookie)</span> </span>&#123;</span><br><span class="line">            Choreographer.getInstance().postFrameCallback(<span class="keyword">new</span> FrameCallback() &#123;</span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">doFrame</span><span class="params">(<span class="keyword">long</span> frameTimeNanos)</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">float</span> fps = VsyncWaiter.<span class="keyword">this</span>.windowManager.getDefaultDisplay().getRefreshRate();</span><br><span class="line">                    <span class="keyword">long</span> refreshPeriodNanos = (<span class="keyword">long</span>)(<span class="number">1.0E9</span>D / (<span class="keyword">double</span>)fps);</span><br><span class="line">                    FlutterJNI.nativeOnVsync(frameTimeNanos, frameTimeNanos + refreshPeriodNanos, cookie);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br></pre></td></tr></table></figure>
+<p>由以上代码可以看到在GPU发出Vsync信号后，会通过JNI调用C++层渲染逻辑，即上述代码中<em>FlutterJNI.nativeOnVsync</em>完成的逻辑</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>纵观FlutterApplication中的初始化逻辑，并没有很复杂和耗时的操作，都是一些准备工作，如下图：</p>
+<p><img src="https://raw.githubusercontent.com/seasonfif/picture/master/flutter/FlutterApplication_create.jpg" alt="FlutterApplication_create"></p>
+<p>总结其主要工作有以下几点：</p>
+<ol>
+<li>确保该方法必须运行在主线程，否则抛出异常；</li>
+<li>初始化配置参数，vm_snapshot_data、vm_snapshot_instr、isolate_snapshot_data、isolate_snapshot_instr、flutter_assets的值</li>
+<li>获取应用根目录下的所有assets资源路径，提取产物资源，加载到内存；</li>
+<li>加载libflutter.so库，调用JNI_OnLoad()；<ul>
+<li>Android进程自身会创建JavaVM，此处将当前进程的JavaVM实例保存在静态变量g_jvm，再将当前线程和JavaVM建立关联</li>
+<li>注册FlutterMain的JNI方法，nativeInit()和nativeRecordStartTimestamp()</li>
+<li>注册PlatformViewAndroid的一系列方法，完成Java和C++的一些方法互调；</li>
+<li>注册VSyncWaiter的nativeOnVsync()用于Java调用C++，asyncWaitForVsync()用于C++调用Java；</li>
+</ul>
+</li>
+<li>最终将FlutterApplication的启动耗时记录，通过engine_main_enter_ts变量。</li>
+</ol>
+
+        
+    
+
+    
+</div>
+
+
+                    
+
+                    <!-- Post Comments -->
+                    
+                        
+    <style>
+	.comment-padding{
+		padding:40px;
+	}
+
+	@media screen and (max-width: 480px){
+		.comment-padding{
+			padding:5px;
+		}
+	}
+</style>
+
+<div id="comment" class="vcomment comment-padding"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'true' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "0sCUN38EBFYznhxrMgsQ9DUa-gzGzoHsz",
+        appKey: "q9GMqQkjVN7jWkscuy53XJU5",
+        placeholder: "来吧，互相伤害吧！",
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info
+    });
+</script>
+
+                    
+                </div>
+
+                <!-- Post Prev & Next Nav -->
+                <style>
+
+    .nav_text {
+        /* color: #0097A7; */
+    }
+
+    .nav_text:hover{
+        text-decoration: underline
+    }
+</style>
+<nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <div style="text-align:right">
+            <a href="/2017/10/23/python/python分布式进程/" id="post_nav-older" class="next-content nav_text">
+                <span style="margin-right:7px" class="nav_text">下一篇</span>
+                <button style="margin-bottom:5px" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                    <i style="padding-top:1.5px" class="material-icons">arrow_forward</i>
+                </button>
+                <div>
+                    <h5 style="margin-top:12px" class="nav_text">python分布式进程</h5>
+                </div>
+            </a>
+        </div>
+    
+</nav>
+
+            </div>
+
+            <!-- Post TOC -->
+            
+                <aside> 
+                    <nav class="post-toc-wrap top" id="post-toc">
+                        <h4>目录</h4>
+                        <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Flutter框架介绍"><span class="post-toc-number">1.</span> <span class="post-toc-text">Flutter框架介绍</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#FlutterEngine初始化流程剖析"><span class="post-toc-number">2.</span> <span class="post-toc-text">FlutterEngine初始化流程剖析</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#FlutterEngine初始化"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">FlutterEngine初始化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#flutter配置项与资源加载"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">flutter配置项与资源加载</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#initConfig"><span class="post-toc-number">2.2.1.</span> <span class="post-toc-text">initConfig</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#initResources"><span class="post-toc-number">2.2.2.</span> <span class="post-toc-text">initResources</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#flutter-so加载"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">flutter.so加载</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#C-层的初始化"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">C++层的初始化</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#注册垂直同步信号"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">注册垂直同步信号</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#总结"><span class="post-toc-number">3.</span> <span class="post-toc-text">总结</span></a></li></ol>
+                    </nav>                  
+                    </aside>
+            
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image" style="margin-top: 50px;">
+        <img src="/img/seasonfif.JPG" alt="第五季's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/categories" title="分类">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                标签
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+        <li>
+            <a href="/archive" title="归档">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                归档
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/gallery" title="画廊">
+                
+                    <i class="material-icons sidebar-material-icons">camera</i>
+                
+                画廊
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+    <a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+        sidebar.help
+        <span class="mdl-button__ripple-container">
+          <span class="mdl-ripple"></span>
+        </span>
+      </div>
+    </a>
+
+-->
+
+<!-- Feedback -->
+<!--
+
+    <a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+        sidebar.feedback
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+    </a>
+
+-->
+
+<!-- About Theme -->
+<!--
+
+    <a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+             sidebar.about_theme
+            <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+    </a>
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <style>
+    .toTop{
+        width: 50px;
+        height: 50px;
+        background:#ff4081 !important;
+    }
+
+    .toTop i{
+        margin: 13px;
+    }
+</style>
+
+<div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<style>
+    .mdl-mini-footer{
+        background: #0097A7 !important;
+        color: #BDBDBD !important;
+    }
+
+    .mdl-mini-footer--right-section a{
+        color: #BDBDBD !important;
+    }
+
+    .footer-develop-a:hover {
+        color: #FF80AB !important;
+        text-decoration: underline !important;
+    }
+
+</style>
+
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="https://weibo.com/seasonfif" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/seasonfif" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;2015&nbsp;-<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>seasonfif | 第五季
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?agMErfJdjr2Eo0sH0O7qfA==", true)</script>
+
+
+<script>lsloader.load("jm_js","/js/jquery.leanModal.min.js?AQf83Rf/eF1HhfnKwwRVhQ==", true)</script>
+<script>lsloader.load("th_js","/js/top-header.js?7u6LuV7zuY6czvmlnc9JpQ==", true)</script>
+
+    <script>lsloader.load("blog_js","/js/blog.js?gyllcJH6iU25FXAVNTR3YQ==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+    
+        <script>lsloader.load("sm_js","/js/smoothscroll.js?lOy/ACj5suSNi7ZVFVbpFQ==", true)</script>
+    
+
+
+
+    <!-- Leancloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+    <script>
+        AV.initialize('0sCUN38EBFYznhxrMgsQ9DUa-gzGzoHsz', 'q9GMqQkjVN7jWkscuy53XJU5');
+    </script>
+    <script type="text/ls-javascript" id="leancloud-views-script">
+    function showTime(Counter) {
+        var query = new AV.Query(Counter);
+        $('.leancloud-views_num').each(function() {
+            var url = $(this).attr('id').trim();
+            query.equalTo('url', url);
+            query.find({
+                success: function(results) {
+                    if (results.length === 0) {
+                        var content = '0 ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                        return;
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    }
+                },
+                error: function(object, error) {
+                    console.log('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        });
+    }
+
+    function addCount(Counter) {
+      var Counter = AV.Object.extend('Counter');
+      url = $('.leancloud-views_num').attr('id').trim();
+      title = $('.leancloud-views_num').attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+      query.equalTo('url', url);
+      query.find({
+          success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment('time');
+                counter.save(null, {
+                    success: function(counter) {
+                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+              var newcounter = new Counter();
+              newcounter.set('title', title);
+              newcounter.set('url', url);
+              newcounter.set('time', 1);
+              newcounter.save(null, {
+                  success: function(newcounter) {
+                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
+                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+                      $(document.getElementById(url)).text(content);
+                  },
+                  error: function(newcounter, error) {
+                      console.log('Failed to create');
+                  }
+              });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + ' ' + error.message);
+        }
+      });
+    }
+    $(function() {
+        var Counter = AV.Object.extend('Counter');
+        if ($('.leancloud-views_num').length === 1) {
+            addCount(Counter);
+        } else if ($('.post-title-link').length > 1) {
+            showTime(Counter);
+        }
+    });
+</script>
+
+
+
+
+
+
+   
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>

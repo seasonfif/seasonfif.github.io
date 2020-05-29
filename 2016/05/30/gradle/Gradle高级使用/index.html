@@ -1,0 +1,1449 @@
+<!DOCTYPE html>
+<html style="display: none;" lang="zh">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        © Material Theme
+        https://github.com/viosey/hexo-theme-material
+        Version: 1.5.2 -->
+    <script>
+        window.materialVersion = "1.5.2"
+        // Delete localstorage with these tags
+        window.oldVersion = [
+            'codestartv1',
+            '1.3.4',
+            '1.4.0',
+            '1.4.0b1',
+            '1.5.0'
+        ]
+    </script>
+
+    <!-- dns prefetch -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+
+    <link rel="dns-prefetch" href="https://cdn1.lncld.net"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Meta & Info -->
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!-- Title -->
+    
+    <title>
+        
+            Gradle高级使用 | 
+        
+        seasonfif | 第五季
+    </title>
+
+    <!-- Favicons -->
+    <link rel="icon shortcut" type="image/ico" href="/img/seasonfif.JPG">
+    <link rel="icon" href="/img/seasonfif.JPG">
+
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" itemprop="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="theme-color" content="#0097A7"/>
+
+    <!-- Disable Fucking Bloody Baidu Tranformation -->
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+    <!--[if lte IE 9]>
+        <link rel="stylesheet" href="/css/ie-blocker.css">
+
+        
+            <script src="/js/ie-blocker.zhCN.js"></script>
+        
+    <![endif]-->
+
+    <!-- Import lsloader -->
+    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
+
+    <!-- Import queue -->
+    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
+
+    <!-- Import CSS -->
+    
+        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?OIqfivxywtwaQrjrKubNQg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?dHwxgeJO7kQ9iS02XSHaDA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+        
+
+    
+
+    
+
+    <!-- Config CSS -->
+
+<!-- Other Styles -->
+<style>
+  body, html {
+    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+    overflow-x: hidden !important;
+  }
+  
+  code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  a {
+    color: #00838F;
+  }
+
+  .mdl-card__media,
+  #search-label,
+  #search-form-label:after,
+  #scheme-Paradox .hot_tags-count,
+  #scheme-Paradox .sidebar_archives-count,
+  #scheme-Paradox .sidebar-colored .sidebar-header,
+  #scheme-Paradox .sidebar-colored .sidebar-badge{
+    background-color: #0097A7 !important;
+  }
+
+  /* Sidebar User Drop Down Menu Text Color */
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
+  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
+    color: #0097A7 !important;
+  }
+
+  #post_entry-right-info,
+  .sidebar-colored .sidebar-nav li:hover > a,
+  .sidebar-colored .sidebar-nav li:hover > a i,
+  .sidebar-colored .sidebar-nav li > a:hover,
+  .sidebar-colored .sidebar-nav li > a:hover i,
+  .sidebar-colored .sidebar-nav li > a:focus i,
+  .sidebar-colored .sidebar-nav > .open > a,
+  .sidebar-colored .sidebar-nav > .open > a:hover,
+  .sidebar-colored .sidebar-nav > .open > a:focus,
+  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
+    color: #0097A7 !important;
+  }
+
+  .toTop {
+    background: #757575 !important;
+  }
+
+  .material-layout .material-post>.material-nav,
+  .material-layout .material-index>.material-nav,
+  .material-nav a {
+    color: #757575;
+  }
+
+  #scheme-Paradox .MD-burger-layer {
+    background-color: #757575;
+  }
+
+  #scheme-Paradox #post-toc-trigger-btn {
+    color: #757575;
+  }
+
+  .post-toc a:hover {
+    color: #00838F;
+    text-decoration: underline;
+  }
+
+</style>
+
+
+<!-- Theme Background Related-->
+
+    <style>
+      body{
+        background-color: #F5F5F5;
+      }
+
+      /* blog_info bottom background */
+      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
+        background-color: #fff;
+      }
+    </style>
+
+
+
+
+<!-- Fade Effect -->
+
+    <style>
+      .fade {
+        transition: all 800ms linear;
+        -webkit-transform: translate3d(0,0,0);
+        -moz-transform: translate3d(0,0,0);
+        -ms-transform: translate3d(0,0,0);
+        -o-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+        opacity: 1;
+      }
+
+      .fade.out{
+        opacity: 0;
+      }
+    </style>
+
+
+<!-- Import Font -->
+<!-- Import Roboto -->
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+
+
+<!-- Import Material Icons -->
+
+
+    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
+
+
+
+
+    <!-- Import jQuery -->
+    
+        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
+    
+
+    <!-- WebAPP Icons -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="seasonfif | 第五季">
+    <meta name="msapplication-starturl" content="https://seasonfif.github.io/2016/05/30/gradle/Gradle高级使用/">
+    <meta name="msapplication-navbutton-color" content="#0097A7">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="seasonfif | 第五季">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon" href="/img/seasonfif.JPG">
+
+    <!-- Site Verification -->
+    
+    
+
+    <!-- RSS -->
+    
+
+    <!-- The Open Graph protocol -->
+    <meta property="og:url" content="https://seasonfif.github.io/2016/05/30/gradle/Gradle高级使用/">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Gradle高级使用 | seasonfif | 第五季">
+    <meta property="og:image" content="/img/seasonfif.JPG">
+    <meta property="og:description" content="">
+    
+
+    
+        <meta property="article:published_time" content="Mon May 30 2016 15:31:34 GMT+0800">
+        <meta property="article:modified_time" content="Fri May 29 2020 11:53:03 GMT+0800">
+    
+
+    <!-- The Twitter Card protocol -->
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Add canonical link for SEO -->
+    
+        <link rel="canonical" href="https://seasonfif.github.io/2016/05/30/gradle/Gradle高级使用/index.html" />
+    
+
+    <!-- Structured-data for SEO -->
+    
+        
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "mainEntityOfPage": "https://seasonfif.github.io/2016/05/30/gradle/Gradle高级使用/index.html",
+    "headline": "Gradle高级使用",
+    "datePublished": "Mon May 30 2016 15:31:34 GMT+0800",
+    "dateModified": "Fri May 29 2020 11:53:03 GMT+0800",
+    "author": {
+        "@type": "Person",
+        "name": "第五季",
+        "image": {
+            "@type": "ImageObject",
+            "url": "/img/seasonfif.JPG"
+        },
+        "description": "陌上人如玉 ,,第五季的博客 "
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "seasonfif | 第五季",
+        "logo": {
+            "@type":"ImageObject",
+            "url": "/img/seasonfif.JPG"
+        }
+    },
+    "keywords": "",
+    "description": "",
+}
+</script>
+
+
+    
+
+    <!-- Analytics -->
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-111267309-1', 'auto');ga('send', 'pageview');
+</script>
+    
+    
+    
+
+    <!-- Custom Head -->
+    
+
+</head>
+
+
+    
+        <body id="scheme-Paradox" class="lazy">
+            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+                <style>
+
+    .header_content{
+        width: 100%;
+        height: 220px;
+        background: #0097A7;
+        box-shadow: 0 0 7px rgba(0, 0, 0, 0.15);
+    }
+
+    .top-header {
+        /* position: fixed; */
+        left: 0;
+        top: 0;
+        width: 100%;
+        color: #0097A7;
+        height: 56px;
+        background: #0097A7;
+        -webkit-transition: padding-left .6s ease-in-out, background-color .3s cubic-bezier(.4,0,.2,1), box-shadow .15s linear;
+        transition: padding-left .6s ease-in-out, background-color .3s cubic-bezier(.4,0,.2,1), box-shadow .15s linear;
+        /* transition: all 1500ms cubic-bezier(0.23, 1, 0.32, 1) 0ms; */
+        z-index: 1;
+    }
+    .top-header.fixed {
+        position: fixed;
+        box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16), 0 2px 10px 0 rgba(0,0,0,0.12);
+    }
+    .top-header.fixed .header-title {
+        visibility: visible;
+    }
+
+    /* flex布局  */
+    .flex-row,
+    .flex-column,
+    .flex-row-vertical {
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display:         flex;
+        -webkit-align-items: center; 
+        align-items: center;
+    }
+
+    .MD-burger-layer {
+        background: white !important;
+    }
+
+    .MD-burger-icon- {
+        margin: 0 0 0 1pc;
+        cursor: pointer;
+        border: none;
+        background: 0 0;
+        outline: 0;
+        top: 2pc;
+        z-index: 0;
+        height: 2pc;
+        width: 2pc;
+    }
+
+    .header-icon {
+        width: 56px;
+        height: 56px;
+        line-height: 56px;
+        text-align: center;
+        color: white;
+    }
+
+    .flex-col {
+        -webkit-box-flex: 1;
+        -webkit-flex: 1;
+            -ms-flex: 1;
+                flex: 1;
+    }
+    .ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+
+<div class="header_content" id="header">
+    <header class="top-header" id="header_top">
+        <div class="flex-row">
+
+            <!-- Hamburger Button -->
+            <button class="MD-burger-icon- sidebar-toggle">
+                <span class="MD-burger-layer"></span>
+            </button>
+
+            <div class="flex-col header-title ellipsis"></div>
+
+            <a style="margin-right: 5px;" class="menu-search modal-trigger" href="#search">
+                <i style="margin: 13px;" class="material-icons mdl-color-text--white" role="presentation">search</i>
+            </a>
+        </div>
+    </header>
+
+    <style>
+    #lean_overlay {  
+        position: fixed;  
+        z-index:1;
+        top: 0px;  
+        left: 0px;  
+        height:100%;  
+        width:100%;  
+        background: #000;  
+        display: none;  
+    }
+
+    .modal {
+      display: none;
+      position: absolute;
+      left: 0;
+      right: 0;
+      background-color: #fafafa;
+      padding: 0;
+      max-height: 70%;
+      width: 55%;
+      margin: 0 auto;
+      overflow-y: auto;
+      border-radius: 2px;
+      will-change: top, opacity;
+      box-shadow: 0 16px 28px 0 rgba(0,0,0,0.22),0 25px 55px 0 rgba(0,0,0,0.21);
+    }
+
+    .search-modal {
+      padding: 10px 0 30px 0;
+      max-height: 80%;
+    }
+
+    .modal-bg{
+      background-color: rgb(204, 232, 207);
+      z-index: 9999;
+      opacity: 1;
+      transform: scaleX(1);
+    }
+
+    .row {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 20px;
+        padding: 0px 15px;
+    }
+
+    .row .col.s12 {
+        width: 100%;
+        margin-left: auto;
+        left: auto;
+        right: auto;
+    }
+    .row .col {
+        float: left;
+        box-sizing: border-box;
+        padding: 0 0.75rem;
+    }
+    .input-field {
+        position: relative;
+        margin-top: 1rem;
+    }
+
+
+    input[type=text]
+    :focus {
+      border-bottom-color: #757575;
+      box-shadow: 0 1px 0 0 #757575;
+    }
+    input[type=text]
+    :focus+label {
+      color: #212121;
+    }
+    .search-modal .search-result {
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+
+    .mdl-textfield__input {
+        color: #0097A7;
+    }
+</style>
+<div id="search" class="modal search-modal">
+    <div class="row">
+        <div class="input-field col s12">
+            <span id="search-input-title" style="display:block; margin-bottom:7px;"><label for="search-input">搜索</label></span>
+            <input id="search-input" class="mdl-textfield__input search-input" type="search" placeholder="">   
+        </div>
+    </div>
+    <div id="local-search-result" class="search-result col s12">
+    </div>
+</div>
+</div>
+
+
+
+                <style>
+                    .material-layout__content{
+                        margin-top: -130px !important;
+                        padding-top: 0px !important;
+                    }
+                </style>
+                
+                
+                
+
+                <!-- Main Container -->
+                <main class="material-layout__content" id="main">
+
+                    <!-- Top Anchor -->
+                    <div id="top"></div>
+
+                    <!-- Layouts -->
+
+    <style>
+        .mdl-card:hover {
+            box-shadow:0px 20px 20px rgba(0,0,0,.156863),0 3px 10px rgba(0,0,0,.227451);
+        }
+
+        .material-post_container {
+            display: flex;
+            flex-flow: row;
+            flex-wrap: nowrap;
+        }
+
+        .material-post{
+            max-width: 768px !important;
+            width: 100%;
+            margin: 0 0 0 0 !important;
+        }
+
+        .center-container{
+            display: flex;
+            flex-flow: row;
+            flex-wrap: nowrap;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 768px;
+            
+                max-width: 900px;
+            
+        }
+        
+        /* 目录样式 */
+        .post-toc-wrap {
+        position: fixed;
+        margin-left: 50px;
+        overflow-x: hidden;
+        }
+        .post-toc-wrap.top{
+            margin-top: 150px;
+        }
+        .post-toc-wrap.fixed {
+        top: 0px;
+        bottom: 140px;
+        overflow-y: auto;
+        }
+        .post-toc-wrap ol,
+        .post-toc-wrap ul {
+        list-style: none;
+        margin: 0;
+        }
+        .post-toc-wrap h4 {
+        padding: 0 0 0px 20px;
+        font-size: 15px;
+        font-weight: 600;
+        color: #727272;
+        }
+
+        .post-toc-child {
+        padding-left: 10px;
+        }
+        .post-toc {
+            width: auto;
+            word-wrap: normal;
+            white-space: nowrap;
+            padding: 0;
+            list-style: none;
+            padding: 0 7px;
+        }
+
+        .post-toc a:hover {
+            color: #ff4081;
+            text-decoration: underline;
+        }
+        .post-toc >.post-toc-item {
+        position: relative;
+        }
+        .post-toc-item {
+        font-weight: 400;
+        color: #ff4081;
+        }
+        .post-toc-item.active >.post-toc-link {
+        font-weight: 600;
+        color: #ff4081;
+        }
+        .post-toc-item.active >.post-toc-link:before {
+        background: rgba(0,0,0,0.06);
+        }
+        .post-toc-item.active >.post-toc-link:after {
+        border-left: 3px solid #ff4081;
+        }
+        .post-toc-link {
+        position: relative;
+        z-index: 2;
+        display: block;
+        padding: 3px 20px;
+        line-height: 1.5rem;
+        color: inherit;
+        word-break: break-all;
+        }
+        .post-toc-link:hover {
+        opacity: .8;
+        }
+        .post-toc-link:before,
+        .post-toc-link:after {
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        }
+    </style>
+    <!-- Post Module -->
+    <div class="material-post_container">
+
+        <div class="center-container">
+            <div class="material-post mdl-grid">
+                <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
+
+                    <!-- Post Header(Thumbnail & Title) -->
+                    
+    <!-- Paradox Post Header -->
+    
+        <!-- Custom Thumbnail -->
+        <div class="post_thumbnail-custom mdl-card__media mdl-color-text--grey-50" style="background-image:url(https://raw.githubusercontent.com/seasonfif/picture/master/other/gradleinfo.png)">
+    
+            <p class="article-headline-p">
+                Gradle高级使用
+            </p>
+        </div>
+
+
+
+
+
+                    
+                        <!-- Paradox Post Info -->
+                        <style>
+    .worldcount_content{
+        margin-left:25px;
+    }
+
+    @media screen and (max-width: 480px) {
+      .worldcount_content {
+        margin-left:5px
+      }
+  }
+</style>
+
+<div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
+
+    <!-- Author Avatar -->
+    <div id="author-avatar">
+        <img src="/img/seasonfif.JPG" width="44px" height="44px" alt="Author Avatar"/>
+    </div>
+    <!-- Author Name & Date -->
+    <div>
+        <strong>第五季</strong>
+        <span>2016.5.30</span>
+    </div>
+
+    <div class="worldcount_content">
+        <span class="post-count">字数：3,731字</span>
+        <span class="post-count">时长：14分钟</span>
+    </div>
+
+    <div class="section-spacer"></div>
+
+    <!-- Favorite -->
+    <!--
+        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
+            <i class="material-icons" role="presentation">favorite</i>
+            <span class="visuallyhidden">favorites</span>
+        </button>
+    -->
+
+    <!-- Tags (bookmark) -->
+    
+
+    <!-- Share -->
+    
+        <button id="article-functions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
+    <i class="material-icons" role="presentation">share</i>
+    <span class="visuallyhidden">share</span>
+</button>
+
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="weixin-qrcode-button">
+    <li class="mdl-menu__item">微信扫一扫分享</li>
+    
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPYAAAD2CAAAAADAeSUUAAAC1ElEQVR42u3aUW7jMAwE0Nz/0rsHKOLMUG7gSi9fQeLYeirQAUm9/h35emFjY2NjY2NjY2M/kv2KXz9/dX2fn1fm76+fOFwzNjY29tbsD//6Y/b1PfNNvF7DcM3Y2NjYB7BnIfTu+iTk8u2brQEbGxsbO7/mHTgpFZLrV9aMjY2NjT0LkrbweHf9Q3MbGxsb+5HsvKGTLP07o4Iv9dKwsbGxH8/Oh6bPef/V+TY2Njb2g9n1EcZ4U5I7JId+8jt/eC42Njb2puyVxlC7lDwgP7SH4nViY2Njn8BOwmN9xLsSlu23bz/HxsbGPoCdB09bZiRX5oE0WwM2Njb2Cey8JFgpJGYbmq8hGvRiY2Njb8SeNZWuf9sGW/vE2+bb2NjY2Bux2zIjH8SuHwDKP6kHvdjY2NhbsJMoSgqSpERZbw/NRsXY2NjYe7NbUl7AtCXEOnipqYSNjY39x9m/dxSyPXaTb0Td2MLGxsbelJ0ftcmj7t44XN8ybGxs7HPYs1bRrOnTAmZjYGxsbOwT2HctaP2ATjtmruMNGxsbe1N2exxnJcDap7SROTyyg42Njf3H2Um7fyW6klCcRWn+LTY2Nvbe7JWb5iVHEoRtoZL/ebCxsbFPYN9VlsyipcXkowJsbGzsE9j5A/IDOskns8ZTPqLGxsbGPo2dt9rbwiMPsDqQ2mjExsbGPpKdx9VsU9oQSlZ1Q4BhY2Njb8Rum0F5synfjlnEYmNjY5/JXomKlaFv28y6vqYYD2BjY2NvwV4JqnaD7i082tDFxsbG3pU9G7jOAilv+t91cBMbGxv7HHbbMMoP1rTbl29rPdLAxsbGPoA9bNaMjvjkd8vDddhLw8bGxsYeHZdsS6Dk8w9Px8bGxsaOS5F2iTkg+e0vliLY2NjYj2e3BcP6dqyUMXV8YmNjY2/NnjVu8gevDxXarcTGxsY+h33OCxsbGxsbGxsbG/sxr/+dzprdXUKk4wAAAABJRU5ErkJggg==">
+    
+</ul>
+
+<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-share-button">
+    
+    <!-- Leancloud Views -->
+        <a class="post_share-link" href="#">
+            <li class="mdl-menu__item">
+                <span id="/2016/05/30/gradle/Gradle高级使用/" class="leancloud-views_num" data-flag-title="Gradle高级使用">
+     &nbsp;浏览量
+</span>
+
+            </li>
+        </a>
+    
+
+    
+
+    <!-- Share Weixin -->
+    
+        <a id="weixin-qrcode-button" class="post_share-link" href="javascript:void(0);">
+            <li class="mdl-menu__item" role="presentation">
+                分享到微信
+            </li>
+        </a>
+    
+
+    <!-- Share Weibo -->
+    
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Gradle高级使用&url=https://seasonfif.github.io/2016/05/30/gradle/Gradle高级使用/index.html&pic=https://seasonfif.github.io/img/seasonfif.JPG&searchPic=false&style=simple" target="_blank">
+            <li class="mdl-menu__item">
+                分享到微博
+            </li>
+        </a>
+    
+
+    <!-- Share Twitter -->
+    
+
+    <!-- Share Facebook -->
+    
+
+    <!-- Share Google+ -->
+    
+
+    <!-- Share LinkedIn -->
+    
+
+    <!-- Share QQ -->
+    
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=seasonfif | 第五季&title=Gradle高级使用&summary=&pics=https://seasonfif.github.io/img/seasonfif.JPG&url=https://seasonfif.github.io/2016/05/30/gradle/Gradle高级使用/index.html" target="_blank">
+            <li class="mdl-menu__item">
+                分享到 QQ
+            </li>
+        </a>
+    
+
+    <!-- Share Telegram -->
+    
+</ul>
+    
+</div>
+
+                    
+                    
+                    <!-- Post Content -->
+                    <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+    
+        <h3 id="Gradle简介"><a href="#Gradle简介" class="headerlink" title="Gradle简介"></a>Gradle简介</h3><p>　　Gradle傲居构建江湖盟主一位已有好几载，Google Android Studio的推出又将之引入到Android的世界，让我们有幸认识到他的强大。博主在使用之后对他的称赞也是不绝于口，那现在就让我带领你认识这个被称为“神器”的构建工具吧。</p>
+<h3 id="Gradle是什么"><a href="#Gradle是什么" class="headerlink" title="Gradle是什么"></a>Gradle是什么</h3><p>　　Gradle跟ant/maven一样，是一种依赖管理/自动化构建工具。但是跟ant/maven不一样，它并没有使用xml语言，而是采用了Groovy语言，这使得它更加简洁、灵活，更加强大的是，gradle完全兼容maven和ivy。官方称它是 java ( JVM ) 世界中构建技术的一个飞跃。</p>
+<h3 id="Gradle的特点"><a href="#Gradle的特点" class="headerlink" title="Gradle的特点"></a>Gradle的特点</h3><ol>
+<li><p>声明式构建和合约构建<br>Gradle 的核心是基于 Groovy 的 领域特定语言 (DSL), 具有十分优秀的扩展性. Gradle 通过提供可以随意集成的声明式语言元素将声明性构建推到了一个新的高度. 这些元素也为 Java, Groovy, OSGi, Web 和Scala 等项目提供基于合约构建的支持. 而且, 这种声明式语言是可扩展的. 你可以添加自己的语言元素或加强现有的语言元素, 从而提供简洁, 易于维护和易于理解的构建.</p>
+</li>
+<li><p>基于依赖的编程语言<br>声明式语言位于通用任务图 ( general purpose task graph ) 的顶端，它可以被充分利用在你的构建中. 它具有强大的灵活性, 可以满足使用者对 Gradle 的一些特别的需求.</p>
+</li>
+<li><p>让构建结构化<br>Gradle 的易适应性和丰富性可让你在构建里直接套用通用的设计原则. 例如, 你可以非常容易地使用一些可重用的组件来构成你的构建. 但是不必要的间接内联内容是不合适的. 不要强行拆分已经结合在一起的部分 (例如, 在你的项目层次结构中). 避免使构建难以维护. 总之, 你可以创建一个结构良好，易于维护和易于理解的构建.</p>
+</li>
+<li><p>API深化<br>你会非常乐意在整个构建执行的生命周期中使用 Gradle, 因为Gradle 允许你管理和定制它的配置和执行行为.</p>
+</li>
+<li><p>Gradle 扩展<br>Gradle 扩展得非常好. 不管是简单的独立项目还是大型的多项目构建, 它都能显著的提高效率. 这是真正的结构构建. 顶尖水平的构建功能，还可以解决许多大公司碰到的构建 性能低下的问题.</p>
+</li>
+<li><p>多项目构建<br>Gradle 对多项目的支持是非常出色的. 项目依赖是很重要的部分. 它允许你模拟在多项目构建中项目的关系，这正是你所要关注的地方.Gradle 提供了局部构建的功能. 如果你构建一个单独的子项目, Gradle 会构建这个子项目依赖的所有子项目. 你也可以选择依赖于另一个特别的子项目重新构建这些子项目. 这样在一些大型项目里就可以节省非常多的时间.</p>
+</li>
+<li><p>多种方式来管理你的依赖<br>不同的团队有不同的管理外部依赖的方法. Gradle 对于任何管理策略都提供了合适的支持. 从远程 Maven 和 Ivy 库的依赖管理到本地文件系统的 jars 或者 dirs.</p>
+</li>
+<li><p>Gradle 是第一个构建整合工具<br>Ant 的 tasks是 Gradle 中很重要的部分, 更有趣是 Ant 的 projects 也是十分重要的部分. Gradle 可以直接引入Ant 项目, 并在运行时直接将 Ant targets 转换成 Gradle tasks. 你可以从 Gradle 中依赖它们, 并增强它们的功能, 甚至可以在 build.xml 文件中声明 Gradle tasks 的依赖. 并且properties, paths 等也可以通过同样的方法集成进来.Gradle 完全支持你已有的 Maven 或者 lvy 仓库来构造发布或者提取依赖. Gradle 也提供了一个转化器, 用来将 maven 的 pom.xml 文件转换成 Gradle 脚本. 在运行时引入 Maven 项目也会在稍后推出.</p>
+</li>
+<li><p>易于迁移<br>Gradle 可以兼容任何结构. 因此你可以直接在你的产品构建的分支上开发你的 Gradle 构建, 并且二者可以并行. 通常建议编写一些测试代码来确保它们的功能是相同的. 通过这种方式, 在迁移的时候就不会显得那么混乱和不可靠, 这是通过婴儿学步的方式来获得最佳的实践.</p>
+</li>
+<li><p>基于Groovy<br>Gradle 的构建脚本是通过 Groovy 编写的而不是 XML. 但是并不像其他方式, 这并不是为了简单的展示用动态语言编写的原始脚本有多么强大. 不然的话, 只会导致维护构建变得非常困难. Gradle 的整个设计是朝着一种语言的方向开发的, 并不是一种死板的框架. Groovy 就像胶水一样, 把你像实现的构想和抽象的 Gradle 粘在一起. Gradle提供了一些标准的构想, 但是他们并不享有任何形式的特权. 相比于其他声明式构建系统，这是一个比较突出的特点.</p>
+</li>
+<li><p>Gradle 包装器<br>Gradle 包装器允许你在没有安装 Gradle 的机器上运行 Gradle 构建. 在一些持续集成的服务器上, 这个功能将非常有用. 它同样也能降低使用一个开源项目的门槛, 也就是说构建它将会非常简单. 这个包装器对于公司来说也是很有吸引力的. 它并不需要为客户机提供相应的管理防范. 这种方式同样也能强制某一个版本 Gradle 的使用从而最小化某些支持问题.</p>
+</li>
+<li><p>免费和开源<br>Gradle 是一个开源项目, 遵循 ASL 许可.</p>
+</li>
+</ol>
+<h3 id="Gradle与Maven的区别"><a href="#Gradle与Maven的区别" class="headerlink" title="Gradle与Maven的区别"></a>Gradle与Maven的区别</h3><p>　　Java世界中主要有三大构建工具：Ant、Maven和Gradle。经过几年的发展，Ant几乎销声匿迹、Maven也日薄西山，而Gradle的发展则如日中天。</p>
+<h4 id="依赖管理系统"><a href="#依赖管理系统" class="headerlink" title="依赖管理系统"></a>依赖管理系统</h4><p>　　Maven为Java世界引入了一个新的依赖管理系统。<br>　　1. 在Java世界中，可以用groupId、artifactId、version组成的Coordination（坐标）唯一标识一个依赖。任何基于Maven构建的项目自身也必须定义这三项属性，生成的包可以是Jar包，也可以是war包或者ear包。一个典型的依赖引用如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line"> &lt;groupId&gt;junit&lt;/groupId&gt;</span><br><span class="line"> &lt;artifactId&gt;junit&lt;/artifactId&gt;</span><br><span class="line"> &lt;version&gt;4.12&lt;/version&gt;</span><br><span class="line"> &lt;scope&gt;test&lt;/scope&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line"> &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line"> &lt;artifactId&gt;spring-test&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
+<p>　　从上面可以看出当引用一个依赖时，version可以省略掉，这样在获取依赖时会选择最新的版本。而存储这些组件的仓库有远程仓库和本地仓库之分。远程仓库可以使用世界公用的central仓库，也可以使用Apache Nexus自建私有仓库；本地仓库则在本地计算机上。通过Maven安装目录下的settings.xml文件可以配置本地仓库的路径，以及采用的远程仓库的地址。<br>　　Gradle在设计的时候基本沿用了Maven的这套依赖管理体系。不过它在引用依赖时还是进行了一些改进。首先引用依赖方面变得非常简洁。<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line"> <span class="keyword">compile</span> <span class="string">'org.hibernate:hibernate-core:3.6.7.Final'</span></span><br><span class="line"> testCompile ‘junit:junit:<span class="number">4</span>.+<span class="string">'</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>　　2. Maven和Gradle对依赖项的scope有所不同。在Maven世界中，一个依赖项有6种scope，分别是complie(默认)、provided、runtime、test、system、import。而grade将其简化为了4种，compile、runtime、testCompile、testRuntime。那么如果想在gradle使用类似于provided的scope怎么办？别着急，由于gradle语言的强大表现力，我们可以轻松编写代码来实现类似于provided scope的概念（例如How to use provided scope for jar file in Gradle build?）。<br>　　3. Gradle支持动态的版本依赖。在版本号后面使用+号的方式可以实现动态的版本管理。如下所示：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line"> <span class="keyword">compile</span> ‘junit:junit:<span class="number">4</span>.+<span class="string">'</span></span><br><span class="line"><span class="string">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>　　4. 在解决依赖冲突方面Gradle的实现机制更加明确。使用Maven和Gradle进行依赖管理时都采用的是传递性依赖；而如果多个依赖项指向同一个依赖项的不同版本时就会引起依赖冲突。而Maven处理这种依赖关系往往是噩梦一般的存在。而Gradle在解决依赖冲突方面相对来说比较明确.</p>
+<h4 id="多模块构建"><a href="#多模块构建" class="headerlink" title="多模块构建"></a>多模块构建</h4><p>　　在SOA和微服务的浪潮下，将一个项目分解为多个模块已经是很通用的一种方式。在Maven中需要定义个parent POM作为一组module的聚合POM。在该POM中可以使用<modules>标签来定义一组子模块。parent POM不会有什么实际构建产出。而parent POM中的build配置以及依赖配置都会自动继承给子module。<br>　　而Gradle也支持多模块构建。而在parent的build.gradle中可以使用allprojects和subprojects代码块来分别定义里面的配置是应用于所有项目还是子项目。对于子模块的定义是放置在setttings.gradle文件中的。在gradle的设计当中，每个模块都是Project的对象实例。而在parent build.gradle中通过allprojects或subprojects可以对这些对象进行各种操作。这无疑比Maven要灵活的多。<br>比如在parent的build.gradle中有以下代码：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">allprojects</span> &#123;</span><br><span class="line"> <span class="keyword">task</span> hello &lt;&lt; &#123; <span class="keyword">task</span> -&gt; <span class="keyword">println</span> <span class="string">"I'm $task.project.name"</span> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></modules></p>
+<p>　　执行命令gradle -q hello会依次打印出父module以及各个submodule的项目名称。这种强大的能力能让gradle对各个模块具有更强的定制化。</p>
+<h4 id="一致的项目结构"><a href="#一致的项目结构" class="headerlink" title="一致的项目结构"></a>一致的项目结构</h4><p>　　在Ant时代大家创建Java项目目录时比较随意，然后通过Ant配置指定哪些属于source，那些属于testSource等。而Maven在设计之初的理念就是Conversion over configuration（约定大于配置）。其制定了一套项目目录结构作为标准的Java项目结构。一个典型的Maven项目结构如下：<br><img src="https://raw.githubusercontent.com/seasonfif/picture/master/other/mulujiegou.png" alt="mulu"><br>　　Gradle也沿用了这一标准的目录结构。如果你在Gradle项目中使用了标准的Maven项目结构的话，那么在Gradle中也无需进行多余的配置,只需在文件中包含apply plugin:’java’,系统会自动识别source、resource、test srouce、 test resource等相应资源。不过Gradle作为JVM上的构建工具，也同时支持groovy、scala等源代码的构建，甚至支持Java、groovy、scala语言的混合构建。虽然Maven通过一些插件（比如maven-scala-plugin）也能达到相同目的，但配置方面显然Gradle要更优雅一些。</p>
+<h4 id="一致的构建模型"><a href="#一致的构建模型" class="headerlink" title="一致的构建模型"></a>一致的构建模型</h4><p>　　为了解决Ant中对项目构建活动缺乏标准化的问题，Maven特意设置了标准的项目构建周期，其默认的构建周期如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&lt;phases&gt;</span><br><span class="line"> &lt;phase&gt;validate&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;initialize&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;generate-sources&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;process-sources&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;generate-resources&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;process-resources&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;compile&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;process-classes&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;generate-test-sources&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;process-test-sources&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;generate-test-resources&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;process-test-resources&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;test-compile&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;process-test-classes&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;test&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;prepare-package&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;package&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;pre-integration-test&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;integration-test&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;post-integration-test&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;verify&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;install&lt;/phase&gt;</span><br><span class="line"> &lt;phase&gt;deploy&lt;/phase&gt;</span><br><span class="line">&lt;/phases&gt;</span><br></pre></td></tr></table></figure></p>
+<p>　　而这种构建周期也是Maven最为人诟病的地方。因为Maven将项目的构建周期限制的太死，你无法在构建周期中添加新的phase，只能将插件绑定到已有的phase上。而现在项目的构建过程变得越来越复杂，而且多样化，显然Maven对这种复杂度缺少足够的应变能力。比如你想在项目构建过程中进行一项压缩所有javascript的任务，那么就要绑定到Maven的现有的某个phase上，而显然貌似放在哪个phase都不太合适。而且这些phase都是串行的，整个执行下来是一条线，这也限制了Maven的构建效率。而Gradle在构建模型上则非常灵活。在Gradle世界里可以轻松创建一个task，并随时通过depends语法建立与已有task的依赖关系。甚至对于Java项目的构建来说，Gradle是通过名为java的插件来包含了一个对Java项目的构建周期，这等于Gradle本身直接与项目构建周期是解耦的。</p>
+<h4 id="插件机制"><a href="#插件机制" class="headerlink" title="插件机制"></a>插件机制</h4><p>　　Maven和Gradle设计时都采用了插件机制。但显然Gradle更胜一筹。主要原因在于Maven是基于XML进行配置。所以其配置语法太受限于XML。即使实现很小的功能都需要设计一个插件，建立其与XML配置的关联。比如想在Maven中执行一条shell命令，其配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">&lt;plugin&gt;</span><br><span class="line"> &lt;groupId&gt;org.codehaus.mojo&lt;/groupId&gt;</span><br><span class="line"> &lt;artifactId&gt;exec-maven-plugin&lt;/artifactId&gt;</span><br><span class="line"> &lt;version&gt;1.2&lt;/version&gt;</span><br><span class="line"> &lt;executions&gt;</span><br><span class="line"> &lt;execution&gt;</span><br><span class="line"> &lt;id&gt;drop DB =&gt; db_name&lt;/id&gt;</span><br><span class="line"> &lt;phase&gt;pre-integration-test&lt;/phase&gt;</span><br><span class="line"> &lt;goals&gt;</span><br><span class="line"> &lt;goal&gt;exec&lt;/goal&gt;</span><br><span class="line"> &lt;/goals&gt;</span><br><span class="line"> &lt;configuration&gt;</span><br><span class="line"> &lt;executable&gt;curl&lt;/executable&gt;</span><br><span class="line"> &lt;arguments&gt;</span><br><span class="line"> &lt;argument&gt;-s&lt;/argument&gt;</span><br><span class="line"> &lt;argument&gt;-S&lt;/argument&gt;</span><br><span class="line"> &lt;argument&gt;-X&lt;/argument&gt;</span><br><span class="line"> &lt;argument&gt;DELETE&lt;/argument&gt;</span><br><span class="line"> &lt;argument&gt;http://$&#123;db.server&#125;:$&#123;db.port&#125;/db_name&lt;/argument&gt;</span><br><span class="line"> &lt;/arguments&gt;</span><br><span class="line"> &lt;/configuration&gt;</span><br><span class="line"> &lt;/execution&gt;</span><br><span class="line"> &lt;/executions&gt;</span><br><span class="line">&lt;/plugin&gt;</span><br></pre></td></tr></table></figure></p>
+<p>　　而在Gradle中则一切变得非常简单。<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">task</span> dropDB(type: Exec) &#123;</span><br><span class="line"> commandLine ‘curl’,’-s’,’s’,’-x’,’<span class="keyword">DELETE</span>’,<span class="string">"http://$&#123;db.server&#125;:&#123;db.port&#125;/db_name"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="为什使用Gradle"><a href="#为什使用Gradle" class="headerlink" title="为什使用Gradle"></a>为什使用Gradle</h3><p>　　在脚本构建时, 一个内部的 DSL（基于一个动态语言）相对于 XML 的优势是巨大的. 有这么多的动态语言, 为什么选择 Groovy? 答案在于 Gradle 的运行环境. 虽然 Gradle 以一个通用构建工具为核心, 但是它的重点是Java项目. 在这样的项目中, 显然团队每个成员都对 Java 非常熟悉. 而且构建应尽可能对所有团队成员都是透明的,所以选择了 Groovy.<br>　　那么，为什么不直接使用 Java 作为构建脚本的语言. 这是一个很好的问题. 对于你的团队, 它要有最高的透明度和最低的学习曲线, 也就是说容易掌握. 但由于 Java 的限制, 这样的构建语言不会那么完美和强大. 而像 Python，Groovy 或 Ruby 语言用来作为构建语言会更好. 之所以使用 Groovy 是因为它给 Java 开发人员提供了迄今为止最大的透明度. 其基本的符号和类型与 Java 是一样的，其封装结构和许多其他的地方也是如此. Groovy 在这基础上提供了更多的功能, 而且与 java 有共同的基础。</p>
+
+        
+    
+
+    
+</div>
+
+
+                    
+
+                    <!-- Post Comments -->
+                    
+                        
+    <style>
+	.comment-padding{
+		padding:40px;
+	}
+
+	@media screen and (max-width: 480px){
+		.comment-padding{
+			padding:5px;
+		}
+	}
+</style>
+
+<div id="comment" class="vcomment comment-padding"></div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<script>
+    var GUEST_INFO = ['nick','mail','link'];
+    var guest_info = 'nick,mail'.split(',').filter(function(item){
+        return GUEST_INFO.indexOf(item) > -1
+    });
+    var notify = 'false' == true;
+    var verify = 'true' == true;
+    new Valine({
+        el: '.vcomment',
+        notify: notify,
+        verify: verify,
+        appId: "0sCUN38EBFYznhxrMgsQ9DUa-gzGzoHsz",
+        appKey: "q9GMqQkjVN7jWkscuy53XJU5",
+        placeholder: "来吧，互相伤害吧！",
+        pageSize:'10',
+        avatar:'retro',
+        lang:'zh-cn',
+        guest_info: guest_info
+    });
+</script>
+
+                    
+                </div>
+
+                <!-- Post Prev & Next Nav -->
+                <style>
+
+    .nav_text {
+        /* color: #0097A7; */
+    }
+
+    .nav_text:hover{
+        text-decoration: underline
+    }
+</style>
+<nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
+    <!-- Prev Nav -->
+    
+        <div>
+            <a href="/2016/06/07/gradle/gradle插件编写/" id="post_nav-newer" class="prev-content nav_text">
+                <button style="margin-bottom:5px" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                    <i style="padding-top:1.5px;" class="material-icons">arrow_back</i>
+                </button>
+                <span style="margin-left:7px" class="nav_text">上一篇</span>
+                <div>
+                    <h5 style="margin-top:12px" class="nav_text">Gradle插件编写</h5> 
+                </div>
+            </a>  
+        </div>
+    
+
+    <!-- Section Spacer -->
+    <div class="section-spacer"></div>
+
+    <!-- Next Nav -->
+    
+        <div style="text-align:right">
+            <a href="/2016/05/21/gradle/Gradle初级使用/" id="post_nav-older" class="next-content nav_text">
+                <span style="margin-right:7px" class="nav_text">下一篇</span>
+                <button style="margin-bottom:5px" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
+                    <i style="padding-top:1.5px" class="material-icons">arrow_forward</i>
+                </button>
+                <div>
+                    <h5 style="margin-top:12px" class="nav_text">Gradle初级使用</h5>
+                </div>
+            </a>
+        </div>
+    
+</nav>
+
+            </div>
+
+            <!-- Post TOC -->
+            
+                <aside> 
+                    <nav class="post-toc-wrap top" id="post-toc">
+                        <h4>目录</h4>
+                        <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Gradle简介"><span class="post-toc-number">1.</span> <span class="post-toc-text">Gradle简介</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Gradle是什么"><span class="post-toc-number">2.</span> <span class="post-toc-text">Gradle是什么</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Gradle的特点"><span class="post-toc-number">3.</span> <span class="post-toc-text">Gradle的特点</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Gradle与Maven的区别"><span class="post-toc-number">4.</span> <span class="post-toc-text">Gradle与Maven的区别</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#依赖管理系统"><span class="post-toc-number">4.1.</span> <span class="post-toc-text">依赖管理系统</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#多模块构建"><span class="post-toc-number">4.2.</span> <span class="post-toc-text">多模块构建</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一致的项目结构"><span class="post-toc-number">4.3.</span> <span class="post-toc-text">一致的项目结构</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#一致的构建模型"><span class="post-toc-number">4.4.</span> <span class="post-toc-text">一致的构建模型</span></a></li><li class="post-toc-item post-toc-level-4"><a class="post-toc-link" href="#插件机制"><span class="post-toc-number">4.5.</span> <span class="post-toc-text">插件机制</span></a></li></ol></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#为什使用Gradle"><span class="post-toc-number">5.</span> <span class="post-toc-text">为什使用Gradle</span></a></li></ol>
+                    </nav>                  
+                    </aside>
+            
+        </div>
+    </div>
+
+
+
+                    
+                        <!-- Overlay For Active Sidebar -->
+<div class="sidebar-overlay"></div>
+
+<!-- Material sidebar -->
+<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
+    <div id="sidebar-main">
+        <!-- Sidebar Header -->
+        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
+    <!-- Top bar -->
+    <div class="top-bar"></div>
+
+    <!-- Sidebar toggle button -->
+    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
+        <i class="material-icons">clear_all</i>
+        <span class="mdl-button__ripple-container">
+            <span class="mdl-ripple">
+            </span>
+        </span>
+    </button>
+
+    <!-- Sidebar Avatar -->
+    <div class="sidebar-image" style="margin-top: 50px;">
+        <img src="/img/seasonfif.JPG" alt="第五季's avatar">
+    </div>
+
+    <!-- Sidebar Email -->
+    
+</div>
+
+
+        <!-- Sidebar Navigation  -->
+        <ul class="nav sidebar-nav">
+    <!-- User dropdown  -->
+    <li class="dropdown">
+        <ul id="settings-dropdown" class="dropdown-menu">
+            
+        </ul>
+    </li>
+
+    <!-- Homepage -->
+    
+        <li id="sidebar-first-li">
+            <a href="/">
+                
+                    <i class="material-icons sidebar-material-icons">home</i>
+                
+                主页
+            </a>
+        </li>
+        
+    
+
+    <!-- Archives  -->
+    
+
+    <!-- Categories  -->
+    
+
+    <!-- Pages  -->
+    
+        <li>
+            <a href="/categories" title="分类">
+                
+                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
+                
+                分类
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/tags" title="标签">
+                
+                    <i class="material-icons sidebar-material-icons">bookmark</i>
+                
+                标签
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+        <li>
+            <a href="/archive" title="归档">
+                
+                    <i class="material-icons sidebar-material-icons">inbox</i>
+                
+                归档
+            </a>
+        </li>
+        
+    
+        <li>
+            <a href="/gallery" title="画廊">
+                
+                    <i class="material-icons sidebar-material-icons">camera</i>
+                
+                画廊
+            </a>
+        </li>
+        
+            <li class="divider"></li>
+        
+    
+        <li>
+            <a href="/about" title="关于我">
+                
+                    <i class="material-icons sidebar-material-icons">person</i>
+                
+                关于我
+            </a>
+        </li>
+        
+    
+
+    <!-- Article Number  -->
+    
+</ul>
+
+
+        <!-- Sidebar Footer -->
+        <!--
+I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
+If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
+It will not impact the appearance and can give developers a lot of support :)
+
+很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
+如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
+它不会影响美观并可以给开发者很大的支持和动力。 :)
+-->
+
+<!-- Sidebar Divider -->
+
+
+<!-- Theme Material -->
+
+
+<!-- Help & Support -->
+<!--
+
+    <a href="mailto:hiviosey@gmail.com" class="sidebar-footer-text-a">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+        sidebar.help
+        <span class="mdl-button__ripple-container">
+          <span class="mdl-ripple"></span>
+        </span>
+      </div>
+    </a>
+
+-->
+
+<!-- Feedback -->
+<!--
+
+    <a href="https://github.com/viosey/hexo-theme-material/issues" target="_blank" class="sidebar-footer-text-a">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+        sidebar.feedback
+        <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+    </a>
+
+-->
+
+<!-- About Theme -->
+<!--
+
+    <a href="https://blog.viosey.com/index.php/Material.html" target="_blank" class="sidebar-footer-text-a">
+        <div class="sidebar-text mdl-button mdl-js-button mdl-js-ripple-effect sidebar-footer-text-div" data-upgraded=",MaterialButton,MaterialRipple">
+             sidebar.about_theme
+            <span class="mdl-button__ripple-container"><span class="mdl-ripple"></span></span></div>
+    </a>
+
+-->
+
+    </div>
+
+    <!-- Sidebar Image -->
+    
+
+</aside>
+
+                    
+
+                    
+                        <!-- Footer Top Button -->
+                        <style>
+    .toTop{
+        width: 50px;
+        height: 50px;
+        background:#ff4081 !important;
+    }
+
+    .toTop i{
+        margin: 13px;
+    }
+</style>
+
+<div id="back-to-top" class="toTop-wrap">
+    <a href="#top" class="toTop">
+        <i class="material-icons footer_top-i">expand_less</i>
+    </a>
+</div>
+
+                    
+
+                    <!--Footer-->
+<style>
+    .mdl-mini-footer{
+        background: #0097A7 !important;
+        color: #BDBDBD !important;
+    }
+
+    .mdl-mini-footer--right-section a{
+        color: #BDBDBD !important;
+    }
+
+    .footer-develop-a:hover {
+        color: #FF80AB !important;
+        text-decoration: underline !important;
+    }
+
+</style>
+
+<footer class="mdl-mini-footer" id="bottom">
+    
+        <!-- Paradox Footer Left Section -->
+        <div class="mdl-mini-footer--left-section sns-list">
+    <!-- Twitter -->
+    
+
+    <!-- Facebook -->
+    
+
+    <!-- Google + -->
+    
+
+    <!-- Weibo -->
+    
+        <a href="https://weibo.com/seasonfif" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
+                <span class="visuallyhidden">Weibo</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- Instagram -->
+    
+
+    <!-- Tumblr -->
+    
+
+    <!-- Github -->
+    
+        <a href="https://github.com/seasonfif" target="_blank">
+            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
+                <span class="visuallyhidden">Github</span>
+            </button><!--
+     --></a>
+    
+
+    <!-- LinkedIn -->
+    
+
+    <!-- Zhihu -->
+    
+
+    <!-- Bilibili -->
+    
+
+    <!-- Telegram -->
+    
+    
+    <!-- V2EX -->
+    
+</div>
+
+
+        <!--Copyright-->
+        <div id="copyright">
+            Copyright&nbsp;©&nbsp;2015&nbsp;-<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>seasonfif | 第五季
+            
+        </div>
+
+        <!-- Paradox Footer Right Section -->
+
+        <!--
+        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
+        It will not impact the appearance and can give developers a lot of support :)
+
+        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
+        它不会影响美观并可以给开发者很大的支持。 :)
+        -->
+
+        <div class="mdl-mini-footer--right-section">
+            <div>
+                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
+                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
+            </div>
+        </div>
+    
+</footer>
+
+
+                    <!-- Import JS File -->
+
+    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
+
+
+
+    <script>lsloader.load("js_js","/js/js.min.js?agMErfJdjr2Eo0sH0O7qfA==", true)</script>
+
+
+<script>lsloader.load("jm_js","/js/jquery.leanModal.min.js?AQf83Rf/eF1HhfnKwwRVhQ==", true)</script>
+<script>lsloader.load("th_js","/js/top-header.js?7u6LuV7zuY6czvmlnc9JpQ==", true)</script>
+
+    <script>lsloader.load("blog_js","/js/blog.js?gyllcJH6iU25FXAVNTR3YQ==", true)</script>
+
+
+
+    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
+
+
+<script type="text/ls-javascript" id="NProgress-script">
+    NProgress.configure({
+        showSpinner: true
+    });
+    NProgress.start();
+    $('#nprogress .bar').css({
+        'background': '#29d'
+    });
+    $('#nprogress .peg').css({
+        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
+    });
+    $('#nprogress .spinner-icon').css({
+        'border-top-color': '#29d',
+        'border-left-color': '#29d'
+    });
+    setTimeout(function() {
+        NProgress.done();
+        $('.fade').removeClass('out');
+    }, 800);
+</script>
+
+
+
+    
+        <script>lsloader.load("sm_js","/js/smoothscroll.js?lOy/ACj5suSNi7ZVFVbpFQ==", true)</script>
+    
+
+
+
+    <!-- Leancloud -->
+    <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+    <script>
+        AV.initialize('0sCUN38EBFYznhxrMgsQ9DUa-gzGzoHsz', 'q9GMqQkjVN7jWkscuy53XJU5');
+    </script>
+    <script type="text/ls-javascript" id="leancloud-views-script">
+    function showTime(Counter) {
+        var query = new AV.Query(Counter);
+        $('.leancloud-views_num').each(function() {
+            var url = $(this).attr('id').trim();
+            query.equalTo('url', url);
+            query.find({
+                success: function(results) {
+                    if (results.length === 0) {
+                        var content = '0 ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                        return;
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var object = results[i];
+                        var content = object.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    }
+                },
+                error: function(object, error) {
+                    console.log('Error: ' + error.code + ' ' + error.message);
+                }
+            });
+        });
+    }
+
+    function addCount(Counter) {
+      var Counter = AV.Object.extend('Counter');
+      url = $('.leancloud-views_num').attr('id').trim();
+      title = $('.leancloud-views_num').attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+      query.equalTo('url', url);
+      query.find({
+          success: function(results) {
+            if (results.length > 0) {
+                var counter = results[0];
+                counter.fetchWhenSave(true);
+                counter.increment('time');
+                counter.save(null, {
+                    success: function(counter) {
+                        var content =  counter.get('time') + ' ' + $(document.getElementById(url)).text();
+                        $(document.getElementById(url)).text(content);
+                    },
+                    error: function(counter, error) {
+                        console.log('Failed to save Visitor num, with error message: ' + error.message);
+                    }
+                });
+            } else {
+              var newcounter = new Counter();
+              newcounter.set('title', title);
+              newcounter.set('url', url);
+              newcounter.set('time', 1);
+              newcounter.save(null, {
+                  success: function(newcounter) {
+                      console.log('newcounter.get(\'time\')='+newcounter.get('time'));
+                      var content = newcounter.get('time') + ' ' + $(document.getElementById(url)).text();
+                      $(document.getElementById(url)).text(content);
+                  },
+                  error: function(newcounter, error) {
+                      console.log('Failed to create');
+                  }
+              });
+            }
+        },
+        error: function(error) {
+            console.log('Error:' + error.code + ' ' + error.message);
+        }
+      });
+    }
+    $(function() {
+        var Counter = AV.Object.extend('Counter');
+        if ($('.leancloud-views_num').length === 1) {
+            addCount(Counter);
+        } else if ($('.post-title-link').length > 1) {
+            showTime(Counter);
+        }
+    });
+</script>
+
+
+
+
+
+
+   
+
+
+
+
+
+<!-- UC Browser Compatible -->
+<script>
+	var agent = navigator.userAgent.toLowerCase();
+	if(agent.indexOf('ucbrowser')>0) {
+		document.write('<link rel="stylesheet" href="/css/uc.css">');
+	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
+	}
+</script>
+
+<!-- Import prettify js  -->
+
+
+
+<!-- Window Load -->
+<!-- add class for prettify -->
+<script type="text/ls-javascript" id="window-load">
+    $(window).on('load', function() {
+        // Post_Toc parent position fixed
+        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
+    });
+
+    
+    
+</script>
+
+<!-- MathJax Load-->
+
+
+<!-- Bing Background -->
+
+
+<script type="text/ls-javascript" id="lazy-load">
+    // Offer LazyLoad
+    queue.offer(function(){
+        $('.lazy').lazyload({
+            effect : 'show'
+        });
+    });
+
+    // Start Queue
+    $(document).ready(function(){
+        setInterval(function(){
+            queue.execNext();
+        },200);
+    });
+</script>
+
+<!-- Custom Footer -->
+
+
+
+<script>
+    (function(){
+        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
+
+        for (var i = 0; i < scriptList.length; ++i) {
+            var item = scriptList[i];
+            lsloader.runInlineScript(item.id,item.id);
+        }
+    })()
+</script>
+
+                </main>
+            </div>
+        </body>
+    
+</html>
